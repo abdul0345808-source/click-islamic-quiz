@@ -1,6 +1,24 @@
-/* Jameel Noori Nastaleeq - Lightweight using Google Fonts - Close to original */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
-body, .logo, .splashLogo, #q, .opt{font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif!important}
-html[lang="ar"] body, html[lang="ar"] .logo, html[lang="ar"] #q{font-family:'Noto Naskh Arabic','Traditional Arabic',serif!important}
-html[lang="en"] body, html[lang="en"] button, html[lang="tr"] body, html[lang="fr"] body, html[lang="de"] body, html[lang="es"] body, html[lang="id"] body{font-family:system-ui,sans-serif!important}
-html[lang="ur"] #q, html[lang="ur"] .opt{line-height:2.1}
+
+/* Original Fonts from your file - Jameel Noori Nastaleeq + Arabic - Lightweight Professional */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+
+/* Urdu - Jameel Noori style */
+html[lang="ur"] body, html[lang="ur"] .logo, html[lang="ur"] .splashLogo, html[lang="ur"] #q, html[lang="ur"] .opt, html[lang="ur"] .btnPrimary, html[lang="ur"] .btnSecondary, html[lang="ur"] .descBox {
+  font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Urdu Typesetting',serif!important;
+}
+
+/* Arabic - Original Arabic font style */
+html[lang="ar"] body, html[lang="ar"] .logo, html[lang="ar"] .splashLogo, html[lang="ar"] #q, html[lang="ar"] .opt, html[lang="ar"] .btnPrimary, html[lang="ar"] .btnSecondary {
+  font-family:'Amiri','Noto Naskh Arabic','Traditional Arabic',serif!important;
+  font-size:110%;
+}
+
+/* English, Turkish, French, etc - Clean sans */
+html[lang="en"] body, html[lang="tr"] body, html[lang="fr"] body, html[lang="de"] body, html[lang="es"] body, html[lang="id"] body, html[lang="bn"] body, html[lang="hi"] body {
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif!important;
+}
+
+html[lang="en"] .logo, html[lang="ar"] .logo { line-height:1.6!important; letter-spacing:0.5px; }
+html[lang="ur"] .logo { line-height:2.5!important; letter-spacing:1px; padding:12px 0!important; }
+html[lang="ur"] #q { line-height:2.4!important; }
+html[lang="ar"] #q { line-height:2.0!important; }
