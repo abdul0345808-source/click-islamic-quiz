@@ -5,84 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Click Islamic Quiz Game - 100 Levels</title>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/fonts.css">
 </head>
 <body>
-<div id="splash">
-  <div class="splashLogo" id="splashTitle">کلک اسلامک کوئز گیم</div>
-  <div class="splashSub" id="splashSubtitle">100 لیولز کا اسلامی سفر</div>
+<div class="app">
+  <div style="text-align:right; padding:10px; position:relative; z-index:999;">
+  <select id="langSwitcher" onchange="changeLang(this.value)" style="padding:6px 10px; border-radius:8px; font-size:14px;">
+    <option value="en">🇺🇸 English</option>
+    <option value="ur">🇵🇰 اردو</option>
+    <option value="ar">🇸🇦 العربية</option>
+    <option value="tr">🇹🇷 Türkçe</option>
+    <option value="fr">🇫🇷 Français</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="bn">🇧🇩 বাংলা</option>
+    <option value="hi">🇮🇳 हिंदी</option>
+    <option value="id">🇮🇩 Indonesia</option>
+  </select>
 </div>
-
-<div id="homePage" class="page">
-  <div class="topBar">
-    <select id="langSwitcher" class="langSel" onchange="changeLang(this.value)">
-      <option value="ur">اردو</option>
-      <option value="en">English</option>
-      <option value="ar">العربية</option>
-      <option value="tr">Türkçe</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="es">Español</option>
-      <option value="bn">বাংলা</option>
-      <option value="hi">हिन्दी</option>
-      <option value="id">Indonesia</option>
-    </select>
-    <button id="soundBtn" class="soundBtn" onclick="toggleSound()">🔊</button>
-  </div>
-  <div class="homeHeader">
-    <div class="logo" id="homeTitle">کلک اسلامک<br>کوئز گیم</div>
-    <div class="topics" id="homeTopics">قرآن • حدیث • انبیاء • نماز • زکوٰۃ • روزہ • حج • سیرت • صحابہ • جنت</div>
-    <div class="levelsInfo" id="homeLevels">100 لیولز</div>
-  </div>
-  <div class="descBox" id="homeDesc">10 مختلف اسلامی موضوعات پر 100 لیولز۔ ہر لیول میں 10 سوالات۔ علم میں اضافہ کریں!</div>
-  <button class="btnPrimary" id="startBtn" onclick="showLevels()">▶️ کھیلنا شروع کریں</button>
-  <button class="btnSecondary" id="allLevelsBtn" onclick="showLevels()">🎮 تمام لیولز</button>
-  <button class="btnReset" id="resetBtn" onclick="resetProgress()">ری سیٹ کریں</button>
-  <div style="text-align:center;margin-top:20px;font-size:11px;color:#6b7280;">
-    <span onclick="openPage('privacy')" style="margin:0 8px;cursor:pointer;text-decoration:underline;">Privacy</span>
-    <span onclick="openPage('terms')" style="margin:0 8px;cursor:pointer;text-decoration:underline;">Terms</span>
-    <span onclick="openPage('about')" style="margin:0 8px;cursor:pointer;text-decoration:underline;">About</span>
-    <span onclick="openPage('contact')" style="margin:0 8px;cursor:pointer;text-decoration:underline;">Contact</span>
-  </div>
-</div>
-
-<div id="levelPage" class="page" style="display:none">
-  <div class="topBar">
-    <button class="soundBtn" onclick="showHome()">←</button>
-    <h2 id="levelsTitle" style="color:#ffd700;">لیولز منتخب کریں</h2>
-    <div style="width:40px"></div>
-  </div>
-  <div id="levelGrid" class="levelGrid"></div>
-</div>
-
-<div id="quizPage" class="page" style="display:none">
-  <div class="quizTop">
-    <div><span style="color:#a7f3d0;">لیول </span><span id="levelNo" style="color:#ffd700;font-weight:bold;">1</span></div>
-    <div id="timer" class="timerCircle">10</div>
-    <div><span id="qCount" style="color:#ffd700;">1/10</span></div>
-  </div>
-  <div class="progressBar"><div id="bar" class="progressFill" style="width:100%"></div></div>
-  <div class="qCard">
-    <div id="q">سوال لوڈ ہو رہا ہے...</div>
-    <div id="list"></div>
-  </div>
-</div>
-
-<div id="trophy" style="display:none">
-  <div class="trophyIcon">🏆</div>
-  <h2 style="color:#ffd700;margin:12px 0;">ماشاءاللہ!</h2>
-  <p>لیول <span id="tLevel">1</span> مکمل</p>
-  <p>اسکور: <span id="tScore">0</span>/10</p>
-  <button class="btnPrimary" onclick="closeTrophy()">اگلا لیول</button>
-  <button class="btnSecondary" onclick="showLevels()">تمام لیولز</button>
-</div>
-
-<div id="pageModal" class="modal" style="display:none">
-  <div class="modalBox">
-    <h3 id="modalTitle" style="margin-bottom:12px;color:#065f46;"></h3>
-    <p id="modalText" style="line-height:1.8;font-size:14px;white-space:pre-wrap;"></p>
-    <button class="btnPrimary" onclick="closePage()" style="margin-top:16px;">بند کریں</button>
-  </div>
+  <button id="soundBtn" onclick="toggleSound()">🔊</button>
+  <div id="splash"><div class="splashLogo" id="splashTitle">Click Islamic Quiz Game</div><div id="splashSubtitle" style="font-size:22px; color:#ffd700; margin-top:8px;">10 Topics Per Level</div><div style="color:#a7f3d0; letter-spacing:7px; font-size:13px; font-family:system-ui; margin-top:10px">QURAN • HADITH • NAMAZ • ZAKAT</div></div>
+  <div class="bg bg-0" id="bg"></div><div class="stars"></div>
+  <div id="confetti"></div>
+  <div id="trophy"><div style="font-size:90px">🏆</div><h1 style="color:#ffd700; font-size:48px; margin:15px 0">ماشاءاللہ!</h1><p style="color:white; font-size:26px">لیول <span id="tLevel">1</span> مکمل!</p><p style="color:#a7f3d0; margin:10px 0; font-family:system-ui"><span id="tScore">10</span>/10 درست!</p><button class="mainBtn btnPlay" style="margin-top:20px" onclick="closeTrophy()">اگلا لیول ➡️</button></div>
+  <div class="content">
+    <div id="homePage"><h1 class="logo" id="homeTitle">کلک اسلامک<br>کوئز گیم</h1><p id="homeTopics" style="color:#ffd700; font-size:22px">قرآن • حدیث • انبیاء • نماز • زکوٰۃ</p><p id="homeLevels" style="color:#a7f3d0; letter-spacing:6px; font-size:12px; font-family:system-ui; margin:10px 0 35px">10 TOPICS PER LEVEL • 100 LEVELS</p><!-- ABU JAAN WALI KHASS JAGAH - ATTRACTIVE TAGLINE -->
+<div style="text-align:center; margin:18px 15px; padding:10px 12px; background:rgba(255,215,0,0.08); border:1px dashed rgba(255,215,0,0.3); border-radius:10px;">
+  <p id="homeDesc" style="margin:0; font-size:13px; line-height:1.6; color:#FFD700; font-weight:500; font-family:'Noto Nastaliq Urdu', 'Jameel Noori', serif;">
+    مدارس، سکولز، Tests، انٹرویوز اور ہر اسلامی مقابلے کیلئے بہترین تیاری - 1000 سوالات کا خزانہ!
+  </p>
+</div><button class="mainBtn btnPlay" id="startBtn" onclick="showLevels()">▶️ کھیلنا شروع کریں</button><button class="mainBtn btnLevels" id="allLevelsBtn" onclick="showLevels()">🎮 تمام لیولز (100)</button><button id="resetBtn" onclick="resetProgress()" style="background:none; border:none; color:rgba(255,255,255,0.4); font-size:14px; margin-top:15px; font-family:system-ui">🔄 گیم ری سیٹ</button></div>
+    <div id="levelPage"><div class="levelHeader"><button onclick="showHome()" style="background:rgba(255,255,255,0.15); border:none; color:white; padding:9px 16px; border-radius:50px; font-weight:800; font-family:system-ui">⬅️ واپس</button><h2 id="levelsTitle" style="color:#ffd700; font-size:28px">لیولز</h2><span style="color:#a7f3d0; font-family:system-ui">100</span></div><div class="levelGrid" id="levelGrid"></div></div>
+    <div id="quizPage"><div class="stats"><span id="levelLabel" style="color:white; font-family:system-ui">لیول: <b id="levelNo" style="color:#ffd700">1</b></span><span id="timer">10</span><span id="questionLabel" style="color:white; font-family:system-ui">سوال: <b id="qCount">1/10</b></span></div><div id="barWrap"><div id="bar"></div></div><div class="qBox"><div class="qInner" id="qInner" style="position:relative"><div id="q">لوڈ ہو رہا ہے...</div><div id="list"></div></div></div></div>
 </div>
 
 <script src="js/i18n/uiText.js"></script>
