@@ -7,4 +7,4 @@ export function playWrong(){ playTone(200,0.4,'sawtooth',0.3); }
 export function playFlip(){ playTone(600,0.08,'triangle',0.2); }
 export function playTrophy(){ playTone(400,0.2,'sine',0.5); setTimeout(()=>playTone(600,0.2,'sine',0.5),150); setTimeout(()=>playTone(800,0.4,'sine',0.6),300); }
 export function playTimerLow(){ playTone(300,0.2,'square',0.2); }
-export function toggleSound(){ soundOn=!soundOn; const btn=document.getElementById("soundBtn"); if(btn) btn.innerText=soundOn?"🔊":"🔇"; if(soundOn){initAudio(); playCorrect();} }
+export function toggleSound(){ soundOn=!soundOn; document.getElementById("soundBtn").innerText=soundOn?"🔊":"🔇"; if(soundOn){initAudio(); playCorrect();} }
