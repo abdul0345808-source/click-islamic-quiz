@@ -1,0 +1,6 @@
+/* Jameel Noori Nastaleeq - Lightweight using Google Fonts - Close to original */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+body, .logo, .splashLogo, #q, .opt{font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif!important}
+html[lang="ar"] body, html[lang="ar"] .logo, html[lang="ar"] #q{font-family:'Noto Naskh Arabic','Traditional Arabic',serif!important}
+html[lang="en"] body, html[lang="en"] button, html[lang="tr"] body, html[lang="fr"] body, html[lang="de"] body, html[lang="es"] body, html[lang="id"] body{font-family:system-ui,sans-serif!important}
+html[lang="ur"] #q, html[lang="ur"] .opt{line-height:2.1}
