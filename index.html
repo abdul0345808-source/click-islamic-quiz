@@ -1,36 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head><style>
-@font-face {
-  font-family: "Optimistic";
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Optimistic Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
-}
-:where(html) {
-  font-family: "Optimistic", system-ui, sans-serif;
-}
-:where(code, pre, kbd, samp) {
-  font-family: "Optimistic Mono", ui-monospace, monospace;
-}
-</style>
+<html lang="ur" dir="rtl">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Click Islamic Quiz Game - 100 Levels</title>
-<meta name="description" content="Multilingual Islamic Quiz - 100 Levels - 10 Topics per Level - Quiz in 10 Languages - Production">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- LANGUAGE SWITCHER -->
 <div class="app">
   <div style="text-align:right; padding:10px; position:relative; z-index:999;">
   <select id="langSwitcher" onchange="changeLang(this.value)" style="padding:6px 10px; border-radius:8px; font-size:14px;">
@@ -52,7 +28,7 @@
   <div id="confetti"></div>
   <div id="trophy"><div style="font-size:90px">🏆</div><h1 style="color:#ffd700; font-size:48px; margin:15px 0">ماشاءاللہ!</h1><p style="color:white; font-size:26px">لیول <span id="tLevel">1</span> مکمل!</p><p style="color:#a7f3d0; margin:10px 0; font-family:system-ui"><span id="tScore">10</span>/10 درست!</p><button class="mainBtn btnPlay" style="margin-top:20px" onclick="closeTrophy()">اگلا لیول ➡️</button></div>
   <div class="content">
-    <div id="homePage"><h1 class="logo" id="homeTitle">کلک اسلامک<br>کوئز اردو</h1><p id="homeTopics" style="color:#ffd700; font-size:22px">قرآن • حدیث • انبیاء • نماز • زکوٰۃ</p><p id="homeLevels" style="color:#a7f3d0; letter-spacing:6px; font-size:12px; font-family:system-ui; margin:10px 0 35px">10 TOPICS PER LEVEL • 100 LEVELS</p><!-- ABU JAAN WALI KHASS JAGAH - ATTRACTIVE TAGLINE -->
+    <div id="homePage"><h1 class="logo" id="homeTitle">کلک اسلامک<br>کوئز گیم</h1><p id="homeTopics" style="color:#ffd700; font-size:22px">قرآن • حدیث • انبیاء • نماز • زکوٰۃ</p><p id="homeLevels" style="color:#a7f3d0; letter-spacing:6px; font-size:12px; font-family:system-ui; margin:10px 0 35px">10 TOPICS PER LEVEL • 100 LEVELS</p><!-- ABU JAAN WALI KHASS JAGAH - ATTRACTIVE TAGLINE -->
 <div style="text-align:center; margin:18px 15px; padding:10px 12px; background:rgba(255,215,0,0.08); border:1px dashed rgba(255,215,0,0.3); border-radius:10px;">
   <p id="homeDesc" style="margin:0; font-size:13px; line-height:1.6; color:#FFD700; font-weight:500; font-family:'Noto Nastaliq Urdu', 'Jameel Noori', serif;">
     مدارس، سکولز، Tests، انٹرویوز اور ہر اسلامی مقابلے کیلئے بہترین تیاری - 1000 سوالات کا خزانہ!
@@ -79,5 +55,5 @@
 <script src="js/splash.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/app.js"></script>
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</body>
 </html>
