@@ -1,3 +1,4 @@
+
 const uiText = {
  ur:{title:"کلک اسلامک<br>کوئز اردو",topics:"قرآن • حدیث • انبیاء • نماز • زکوٰۃ",levels:"10 ٹاپکس فی لیول • 100 لیولز",desc:"مدارس، سکولز، ٹیسٹس، انٹرویوز اور اسلامی مقابلوں کے لیے 1000 سوالات!",start:"کھیلنا شروع کریں",all:"تمام لیولز (100)",reset:"🔄 گیم ری سیٹ",levelTitle:"لیولز",back:"⬅️ واپس",level:"لیول:",question:"سوال:",close:"بند کریں",privacy:"پرائیویسی پالیسی",terms:"شرائط و ضوابط",about:"ہمارے بارے میں",contact:"رابطہ کریں",rate:"ریٹ کریں",lang:"زبان",next:"اگلا لیول ➡️",completed:"مکمل!",correct:"درست!",resetConfirm:"کیا آپ واقعی گیم کی پیش رفت ری سیٹ کرنا چاہتے ہیں؟",resetDone:"پیش رفت ری سیٹ ہو گئی ہے۔",privacyTitle:"پرائیویسی پالیسی",termsTitle:"شرائط و ضوابط",aboutTitle:"ہمارے بارے میں",contactTitle:"رابطہ کریں"},
  en:{title:"Click Islamic<br>Quiz",topics:"Quran • Hadith • Prophets • Prayer • Zakat",levels:"10 TOPICS PER LEVEL • 100 LEVELS",desc:"1000 questions for madrasas, schools, tests, interviews and Islamic competitions!",start:"Start Playing",all:"All Levels (100)",reset:"🔄 Reset Game",levelTitle:"Levels",back:"⬅️ Back",level:"Level:",question:"Question:",close:"Close",privacy:"Privacy Policy",terms:"Terms & Conditions",about:"About Us",contact:"Contact Us",rate:"Rate Us",lang:"Language",next:"Next Level ➡️",completed:"Completed!",correct:"Correct!",resetConfirm:"Reset your game progress?",resetDone:"Your progress has been reset.",privacyTitle:"Privacy Policy",termsTitle:"Terms & Conditions",aboutTitle:"About Us",contactTitle:"Contact Us"},
@@ -122,9 +123,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closePage();});
 document.getElementById("langSwitcher")?.addEventListener("change",e=>changeLang(e.target.value));
 
 function hideAll(){ 
-  ["home","levels","quiz","trophy"].forEach(id=>{const el=document.getElementById(id); if(el) el.style.display="none";});
+  ["homePage","levelPage","quizPage","trophy"].forEach(id=>{const el=document.getElementById(id); if(el) el.style.display="none";});
 }
-window.showHome = function(){ hideAll(); const el=document.getElementById("home"); if(el) el.style.display="flex"; };
+window.showHome = function(){ hideAll(); const el=document.getElementById("homePage"); if(el) el.style.display="flex"; };
 window.showLevels = function(){
   hideAll(); const grid=document.getElementById("levelGrid"); if(!grid) return; grid.innerHTML="";
   for(let i=0;i<100;i++){
@@ -132,10 +133,10 @@ window.showLevels = function(){
     if(i+1<=unlocked) d.onclick=()=>startLevel(i);
     grid.appendChild(d);
   }
-  const el=document.getElementById("levels"); if(el) el.style.display="flex";
+  const el=document.getElementById("levelPage"); if(el) el.style.display="flex";
 };
 window.startLevel = function(idx){
-  curLevelIdx=idx; curQIdx=0; score=0; hideAll(); const el=document.getElementById("quiz"); if(el) el.style.display="flex"; showQ();
+  curLevelIdx=idx; curQIdx=0; score=0; hideAll(); const el=document.getElementById("quizPage"); if(el) el.style.display="flex"; showQ();
 };
 window.resetProgress = function(){
   const lang=localStorage.getItem("appLang")||"en";
