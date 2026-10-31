@@ -1,4 +1,17 @@
 {
   "version": 2,
-  "name": "click-islamic-quiz-game"
+  "name": "click-islamic-quiz-game",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "cleanUrls": true
 }
