@@ -1,38 +1,47 @@
-import * as ur from './ur.js';
-import * as en from './en.js';
-import * as ar from './ar.js';
-import * as tr from './tr.js';
-import * as fr from './fr.js';
-import * as de from './de.js';
-import * as es from './es.js';
-import * as bn from './bn.js';
-import * as hi from './hi.js';
-import * as id from './id.js';
+var banks = {};
 
-const banks = { ur, en, ar, tr, fr, de, es, bn, hi, id };
-
-export function getQuestionBank(lang){
-  if(!banks[lang]) lang='en';
-  return banks[lang].allPools;
+function initBanks(){
+  try{
+    banks['ur'] = typeof allPools_ur !== 'undefined' ? allPools_ur : null;
+    banks['en'] = typeof allPools_en !== 'undefined' ? allPools_en : null;
+    banks['ar'] = typeof allPools_ar !== 'undefined' ? allPools_ar : null;
+    banks['tr'] = typeof allPools_tr !== 'undefined' ? allPools_tr : null;
+    banks['fr'] = typeof allPools_fr !== 'undefined' ? allPools_fr : null;
+    banks['de'] = typeof allPools_de !== 'undefined' ? allPools_de : null;
+    banks['es'] = typeof allPools_es !== 'undefined' ? allPools_es : null;
+    banks['bn'] = typeof allPools_bn !== 'undefined' ? allPools_bn : null;
+    banks['hi'] = typeof allPools_hi !== 'undefined' ? allPools_hi : null;
+    banks['id'] = typeof allPools_id !== 'undefined' ? allPools_id : null;
+  }catch(e){ console.log('banks init error', e); }
 }
 
-export function getCategories(lang){
-  return banks[lang]?.categories || banks['en'].categories;
+function getQuestionBank(lang){
+  if(!banks[lang] || Object.keys(banks).length===0) initBanks();
+  return banks[lang] || banks['ur'];
 }
 
-// Production: 100 Levels, 10 questions per level, no expandPool duplicates
-export function buildAllLevels(lang){
-  const bank = getQuestionBank(lang);
-  const keys = ['quran','hadith','anbiya','namaz','zakat','roza','hajj','seerat','sahaba','jannat'];
-  const allLevels=[];
-  for(let L=0; L<100; L++){
-    const level=[];
-    for(let k of keys){
-      const pool = bank[k];
-      if(pool && pool[L]) level.push(pool[L]);
-      else level.push(pool[0]);
-    }
-    allLevels.push(level);
+function buildAllLevels(lang){
+  initBanks();
+  var bank=getQuestionBank(lang);
+  if(!bank){ 
+    // Fallback to ur
+    bank=banks['ur'];
   }
-  return allLevels;
+  var keys=['quran','hadith','anbiya','namaz','zakat','roza','hajj','seerat','sahaba','jannat'];
+  var all=[];
+  for(var L=0; L<100; L++){
+    var lvl=[];
+    for(var i=0;i<keys.length;i++){
+      var k=keys[i];
+      var pool=bank ? bank[k] : null;
+      if(pool && pool[L]) lvl.push(pool[L]);
+      else if(pool && pool[0]) lvl.push(pool[0]);
+      else lvl.push({q:"Question",o:["1","2","3"],a:"1",cat:k});
+    }
+    all.push(lvl);
+  }
+  return all;
 }
+
+// Init banks on load
+initBanks();
