@@ -562,10 +562,281 @@ const pools = {
     name: {en:"The Qur'an",ur:"القرآن",ar:"القرآن",tr:"Kur'an",fr:"Coran",de:"Koran",id:"Al-Qur'an",bn:"আল-কুরআন",hi:"क़ुरआन",es:"El Corán"},
     qs: [
       {q:{en:"How many Surahs in Holy Quran?",ur:"قرآن پاک میں کتنی سورتیں ہیں؟",ar:"كم عدد سور القرآن؟",tr:"Kur'an'da kaç sure var?",fr:"Combien de sourates dans le Coran?",de:"Wie viele Suren im Koran?",id:"Berapa surah dalam Al-Qur'an?",bn:"পবিত্র কুরআনে কতটি সূরা?",hi:"क़ुरआन में कितनी सूरतें?",es:"¿Cuántas suras en el Corán?"},opts:{en:["112","114","116","118"],ur:["112","114","116","118"],ar:["112","114","116","118"],tr:["112","114","116","118"],fr:["112","114","116","118"],de:["112","114","116","118"],id:["112","114","116","118"],bn:["112","114","116","118"],hi:["112","114","116","118"],es:["112","114","116","118"]},ans:1},
-      // YAHAN QURAN KE BAQI 9 SAWAL ADD KAREIN - Level 2-10 ke liye
-      // {q:{en:"...",ur:"...",...},opts:{en:[...],ur:[...],...},ans:0},
-    ]
+      {
+  // 1
+  q: {en:"Which is the longest (main) surah of the Quran?", ur:قرآن کریم کی سب سے طویل سورت کون سی ہے؟, ar:"ما هي أطول سورة في القرآن؟", tr:"Kur'an'ın en uzun suresi hangisidir?", fr:"Quelle est la plus longue sourate du Coran?", de:"Welche ist die längste Sure des Korans?", id:"Surah apa yang paling panjang dalam Al-Qur'an?", bn:"কুরআনের দীর্ঘতম সূরা কোনটি?", hi:"क़ुरआन की सबसे लंबी सूरत कौन सी है?", es:"¿Cuál es la sura más larga del Corán?"},
+  opts: {
+    en: ["Surah Al-Baqarah", "Surah Al-Fatiha", "Surah Al-Ikhlas", "Surah Yasin"],
+    ur: ["سورۃ البقرہ", "سورۃ الفاتحہ", "سورۃ الاخلاص", "سورۃ یٰسین"],
+    ar: ["سورة البقرة", "سورة الفاتحة", "سورة الإخلاص", "سورة يس"],
+    tr: ["Bakara Suresi", "Fatiha Suresi", "İhlas Suresi", "Yasin Suresi"],
+    fr: ["Sourate Al-Baqarah", "Sourate Al-Fatiha", "Sourate Al-Ikhlas", "Sourate Yasin"],
+    de: ["Sure Al-Baqarah", "Sure Al-Fatiha", "Sure Al-Ikhlas", "Sure Yasin"],
+    id: ["Surat Al-Baqarah", "Surat Al-Fatiha", "Surat Al-Ikhlas", "Surat Yasin"],
+    bn: ["সূরা আল-বাকারা", "সূরা আল-ফাতিহা", "সূরা আল-ইখলাস", "সূরা ইয়াসিন"],
+    hi: ["सूरह अल-बक़रा", "सूरह अल-फातिहा", "सूरह अल-इखलास", "सूरह यासीन"],
+    es: ["Sura Al-Baqarah", "Sura Al-Fatiha", "Sura Al-Ikhlas", "Sura Yasin"]
   },
+  ans: 0
+},
+{
+  // 2
+  q: {en:"Which is the longest surah of the Quran?", ur:"قرآن پاک کی سب سے لمبی سورت کون سی ہے؟", ar:"ما هي أطول سورة في القرآن الكريم؟", tr:"Kur'an'ın en uzun suresi hangisidir?", fr:"Quelle est la plus longue sourate du Coran?", de:"Welche Sure des Korans ist am längsten?", id:"Surah mana yang paling panjang dalam Al-Qur'an?", bn:"পবিত্র কুরআনের দীর্ঘতম সূরা কোনটি?", hi:"क़ुरआन की सबसे लंबी सूरत कौन सी है?", es:"¿Cuál es la sura más larga del Corán?"},
+  opts: {
+    en: ["Surah Al-Imran", "Surah Al-Baqarah", "Surah An-Nisa", "Surah Al-Maidah"],
+    ur: ["سورۃ آل عمران", "سورۃ البقرہ", "سورۃ النساء", "سورۃ المائدہ"],
+    ar: ["سورة آل عمران", "سورة البقرة", "سورة النساء", "سورة المائدة"],
+    tr: ["Âl-i İmrân Suresi", "Bakara Suresi", "Nisâ Suresi", "Mâide Suresi"],
+    fr: ["Sourate Al-Imran", "Sourate Al-Baqarah", "Sourate An-Nisa", "Sourate Al-Maidah"],
+    de: ["Sure Al-Imran", "Sure Al-Baqarah", "Sure An-Nisa", "Sure Al-Maidah"],
+    id: ["Surat Ali 'Imran", "Surat Al-Baqarah", "Surat An-Nisa", "Surat Al-Maidah"],
+    bn: ["সূরা আল-ইমরান", "সূরা আল-বাকারা", "সূরা আন-নিসা", "সূরা আল-মায়িদাহ"],
+    hi: ["सूरह आल-इमरान", "सूरह अल-बक़रा", "सूरह अन-निसा", "सूरह अल-माइदाह"],
+    es: ["Sura Al-Imran", "Sura Al-Baqarah", "Sura An-Nisa", "Sura Al-Maidah"]
+  },
+  ans: 1
+},
+{
+  // 3
+  q: {en:"Which is the shortest surah of the Quran?", ur:"قرآن پاک کی سب سے چھوٹی سورت کون سی ہے؟", ar:"ما هي أقصر سورة في القرآن الكريم؟", tr:"Kur'an'ın en kısa suresi hangisidir?", fr:"Quelle est la plus courte sourate du Coran?", de:"Welche ist die kürzeste Sure des Korans?", id:"Surah apa yang paling pendek dalam Al-Qur'an?", bn:"পবিত্র কুরআনের ক্ষুদ্রতম সূরা কোনটি?", hi:"क़ुरआन की सबसे छोटी सूरत कौन सी है?", es:"¿Cuál es la sura más corta del Corán?"},
+  opts: {
+    en: ["Surah Al-Kawthar", "Surah Al-Asr", "Surah An-Nasr", "Surah Al-Ikhlas"],
+    ur: ["سورۃ الكوثر", "سورۃ العصر", "سورۃ النصر", "سورۃ الاخلاص"],
+    ar: ["سورة الكوثر", "سورة العصر", "سورة النصر", "سورة الإخلاص"],
+    tr: ["Kevser Suresi", "Asr Suresi", "Nasr Suresi", "İhlas Suresi"],
+    fr: ["Sourate Al-Kawthar", "Sourate Al-Asr", "Sourate An-Nasr", "Sourate Al-Ikhlas"],
+    de: ["Sure Al-Kawthar", "Sure Al-Asr", "Sure An-Nasr", "Sure Al-Ikhlas"],
+    id: ["Surat Al-Kautsar", "Surat Al-'Asr", "Surat An-Nasr", "Surat Al-Ikhlas"],
+    bn: ["সূরা আল-কাওসার", "সূরা আল-আসরের", "সূরা আন-নাসর", "সূরা আল-ইখলাস"],
+    hi: ["सूरह अल-कौसर", "सूरह अल-अस्र", "सूरह अन-नस्त्र", "सूरह अल-इखलास"],
+    es: ["Sura Al-Kawthar", "Sura Al-Asr", "Sura An-Nasr", "Sura Al-Ikhlas"]
+  },
+  ans: 0
+},
+{
+  // 4
+  q: {en:"Which surah is referred to as the heart of the Quran?", ur:"قرآن پاک کا دل کس سورت کو کہا جاتا ہے؟", ar:"أي سورة تسمى قلب القرآن؟", tr:"Hangi sure Kur'an'ın kalbi olarak adlandırılır?", fr:"Quelle sourate est appelée le cœur du Coran?", de:"Welche Sure wird als das Herz des Korans bezeichnet?", id:"Surah apa yang disebut sebagai jantung Al-Qur'an?", bn:"কোন সূরাকে কুরআনের হৃদয় বলা হয়?", hi:"किस सूरत को क़ुरआन का दिल कहा जाता है?", es:"¿Qué sura es considerada el corazón del Corán?"},
+  opts: {
+    en: ["Surah Yasin", "Surah Mulk", "Surah Ar-Rahman", "Surah Waqi'ah"],
+    ur: ["سورۃ یٰسین", "سورۃ الملک", "سورۃ الرحمٰن", "سورۃ الواقعہ"],
+    ar: ["سورة يس", "سورة الملك", "سورة الرحمن", "سورة الواقعة"],
+    tr: ["Yasin Suresi", "Mülk Suresi", "Rahman Suresi", "Vakıa Suresi"],
+    fr: ["Sourate Yasin", "Sourate Mulk", "Sourate Ar-Rahman", "Sourate Waqi'ah"],
+    de: ["Sure Yasin", "Sure Mulk", "Sure Ar-Rahman", "Sure Waqi'ah"],
+    id: ["Surat Yasin", "Surat Al-Mulk", "Surat Ar-Rahman", "Surat Al-Waqi'ah"],
+    bn: ["সূরা ইয়াসিন", "সূরা মূলক", "সূরা আর-রহমান", "সূরা ওয়াকিয়া"],
+    hi: ["सूरह यासीन", "सूरह मुल्क", "सूरह अर-रहमान", "सूरह वाक़िया"],
+    es: ["Sura Yasin", "Sura Mulk", "Sura Ar-Rahman", "Sura Waqi'ah"]
+  },
+  ans: 0
+},
+{
+  // 5
+  q: {en:"Which surah is equivalent to one-third of the Quran?", ur:"کون سی سورت تہائی قرآن کے برابر ہے؟", ar:"أي سورة تعادل ثلث القرآن الكريم؟", tr:"Hangi sure Kur'an'ın üçte birine bedeldir?", fr:"Quelle sourate équivaut au tiers du Coran?", de:"Welche Sure entspricht einem Drittel des Korans?", id:"Surah apa yang sebanding dengan sepertiga Al-Qur'an?", bn:"কোন সূরাটি কুরআনের এক-তৃতীয়াংশের সমান?", hi:"कौन सी सूरत क़ुरआन के एक तिहाई के बराबर है?", es:"¿Qué sura equivale a un tercio del Corán?"},
+  opts: {
+    en: ["Surah Waqi'ah", "Surah Ikhlas", "Surah Mulk", "Surah Al-Falaq"],
+    ur: ["سورۃ الواقعہ", "سورۃ الاخلاص", "سورۃ الملک", "سورۃ الفلق"],
+    ar: ["سورة الواقعة", "سورة الإخلاص", "سورة الملك", "سورة الفلق"],
+    tr: ["Vakıa Suresi", "İhlas Suresi", "Mülk Suresi", "Felak Suresi"],
+    fr: ["Sourate Waqi'ah", "Sourate Ikhlas", "Sourate Mulk", "Sourate Al-Falaq"],
+    de: ["Sure Waqi'ah", "Sure Ikhlas", "Sure Mulk", "Sure Al-Falaq"],
+    id: ["Surat Al-Waqi'ah", "Surat Al-Ikhlas", "Surat Al-Mulk", "Surat Al-Falaq"],
+    bn: ["সূরা ওয়াকিয়া", "সূরা ইখলাস", "সূরা মূলক", "সূরা আল-ফালাক"],
+    hi: ["सूरह वाक़िया", "सूरह इखलास", "सूरह मुल्क", "सूरह अल-फलाक"],
+    es: ["Sura Waqi'ah", "Sura Ikhlas", "Sura Mulk", "Sura Al-Falaq"]
+  },
+  ans: 1
+},
+{
+  // 6
+  q: {en:"In which surah is Ayat al-Kursi located?", ur:"آیت الکرسی کس سورت میں واقع ہے؟", ar:"في أي سورة توجد آية الكرسي؟", tr:"Ayetel Kürsi hangi surede yer alır?", fr:"Dans quelle sourate se trouve Ayat al-Kursi?", de:"In welcher Sure befindet sich Ayat al-Kursi?", id:"Di surat apa Ayat Kursi berada?",bn:"আয়াতুল কুরসি কোন সূরায় অবস্থিত?", hi:"आयतुल कुर्सी किस सूरत में है?", es:"¿En qué sura se encuentra Ayat al-Kursi?"},
+  opts: {
+    en: ["Surah Al-Imran", "Surah Al-Baqarah", "Surah An-Nisa", "Surah Al-Araf"],
+    ur: ["سورۃ آل عمران", "سورۃ البقرہ", "سورۃ النساء", "سورۃ الاعراف"],
+    ar: ["سورة آل عمران", "سورة البقرة", "سورة النساء", "سورة الأعراف"],
+    tr: ["Âl-i İmrân Suresi", "Bakara Suresi", "Nisâ Suresi", "A'râf Suresi"],
+    fr: ["Sourate Al-Imran", "Sourate Al-Baqarah", "Sourate An-Nisa", "Sourate Al-Araf"],
+    de: ["Sure Al-Imran", "Sure Al-Baqarah", "Sure An-Nisa", "Sure Al-Araf"],
+    id: ["Surat Ali 'Imran", "Surat Al-Baqarah", "Surat An-Nisa", "Surat Al-A'raf"],
+    bn: ["সূরা আল-ইমরান", "সূরা আল-বাকারা", "সূরা আন-নিসা", "সূরা আল-আ'রাফ"],
+    hi: ["सूरह आल-इमरान", "सूरह अल-बक़रा", "सूरह अन-निसा", "सूरह अल-अ'राफ़"],
+    es: ["Sura Al-Imran", "Sura Al-Baqarah", "Sura An-Nisa", "Sura Al-Araf"]
+  },
+  ans: 1
+},
+{
+  // 7
+  q: {en:"How many verses are in Surah Al-Fatiha?", ur:"سورۃ الفاتحہ میں کتنی آیات ہیں؟", ar:"كم عدد آيات سورة الفاتحة؟", tr:"Fatiha Suresi kaç ayettir?", fr:"Combien de versets y a-t-il dans la sourate Al-Fatiha?", de:"Wie viele Verse hat die Sure Al-Fatiha?", id:"Berapa jumlah ayat dalam Surat Al-Fatiha?", bn:"সূরা আল-ফাতিহায় কয়টি আয়াত আছে?", hi:"सूरह अल-फातिहा में कितनी आयतें हैं?", es:"¿Cuántos versículos hay en la sura Al-Fatiha?"},
+  opts: {
+    en: ["5", "6", "7", "8"],
+    ur: ["5", "6", "7", "8"],
+    ar: ["5", "6", "7", "8"],
+    tr: ["5", "6", "7", "8"],
+    fr: ["5", "6", "7", "8"],
+    de: ["5", "6", "7", "8"],
+    id: ["5", "6", "7", "8"],
+    bn: ["৫", "৬", "৭", "৮"],
+    hi: ["5", "6", "7", "8"],
+    es: ["5", "6", "7", "8"]
+  },
+  ans: 2
+},
+{
+  // 8
+  q: {en:"Which surah has every verse ending with the letter 'Sin' (س)?", ur:"کس سورت کی ہر آیت کا اختتام حرف 'س' پر ہوتا ہے؟", ar:"ما هي السورة التي تنتهي كل آية فيها بحرف السين؟", tr:"Hangi surenin her ayeti 'Sin' (س) harfiyle biter?", fr:"Quelle sourate a chaque verset se terminant par la lettre 'Sin' (س)?", de:"Welche Sure endet bei jedem Vers mit dem Buchstaben 'Sin' (س)?", id:"Surah apa yang setiap ayatnya berakhiran huruf 'Sin' (س)?", bn:"কোন সূরার প্রতিটি আয়াত 'সিন' (س) অক্ষর দিয়ে শেষ হয়?", hi:"किस सूरत की हर आयत 'सीन' (س) अक्षर पर समाप्त होती है?", es:"¿Qué sura tiene cada versículo terminado en la letra 'Sin' (س)?"},
+  opts: {
+    en: ["Surah An-Nas", "Surah Ash-Shams", "Surah Al-Falaq", "Surah Al-Ikhlas"],
+    ur: ["سورۃ الناس", "سورۃ الشمس", "سورۃ الفلق", "سورۃ الاخلاص"],
+    ar: ["سورة الناس", "سورة الشمس", "سورة الفلق", "سورة الإخلاص"],
+    tr: ["Nas Suresi", "Şems Suresi", "Felak Suresi", "İhlas Suresi"],
+    fr: ["Sourate An-Nas", "Sourate Ash-Shams", "Sourate Al-Falaq", "Sourate Al-Ikhlas"],
+    de: ["Sure An-Nas", "Sure Ash-Shams", "Sure Al-Falaq", "Sure Al-Ikhlas"],
+    id: ["Surat An-Nas", "Surat Asy-Syams", "Surat Al-Falaq", "Surat Al-Ikhlas"],
+    bn: ["সূরা আন-নাস", "সূরা আশ-শামস", "সূরা আল-ফালাক", "সূরা আল-ইখলাস"],
+    hi: ["सूरह अन-नास", "सूरह अश्-शम्स", "सूरह अल-फलाक", "सूरह अल-इखलास"],
+    es: ["Sura An-Nas", "Sura Ash-Shams", "Sura Al-Falaq", "Sura Al-Ikhlas"]
+  },
+  ans: 1
+},
+{
+  // 9
+  q: {en:"Which surah does not contain the letter 'Ba' (ب) at all?", ur:"کس سورت میں حرف 'ب' بالکل نہیں آتا؟", ar:"ما هي السورة التي لا تحتوي على حرف الباء (ب) نهائياً؟", tr:"Hangi sürede hiç 'Ba' (ب) harfi yoktur?", fr:"Quelle sourate ne contient pas du tout la lettre 'Ba' (ب)?", de:"Welche Sure enthält überhaupt nicht den Buchstaben 'Ba' (ب)?", id:"Surah apa yang sama sekali tidak mengandung huruf 'Ba' (ب)?", bn:"কোন সূরায় 'বা' (ب) অক্ষরটি একবারও নেই?", hi:"किस सूरत में 'बा' (ب) अक्षर बिल्कुल नहीं है?", es:"¿Qué sura no contiene en absoluto la letra 'Ba' (ب)?"},
+  opts: {
+    en: ["Surah Al-Kawthar", "Surah Al-Asr", "Surah Al-Ikhlas", "Surah Al-Kafirun"],
+    ur: ["سورۃ الكوثر", "سورۃ العصر", "سورۃ الاخلاص", "سورۃ الكافرون"],
+    ar: ["سورة الكوثر", "سورة العصر", "سورة الإخلاص", "سورة الكافرون"],
+    tr: ["Kevser Suresi", "Asr Suresi", "İhlas Suresi", "Kafirun Suresi"],
+    fr: ["Sourate Al-Kawthar", "Sourate Al-Asr", "Sourate Al-Ikhlas", "Sourate Al-Kafirun"],
+    de: ["Sure Al-Kawthar", "Sure Al-Asr", "Sure Al-Ikhlas", "Sure Al-Kafirun"],
+    id: ["Surat Al-Kautsar", "Surat Al-'Asr", "Surat Al-Ikhlas", "Surat Al-Kafirun"],
+    bn: ["সূরা আল-কাওসার", "সূরা আল-আসরের", "সূরা আল-ইখলাস", "সূরা আল-কাফিরুন"],
+    hi: ["सूरह अल-कौसर", "सूरह अल-अस्र", "सूरह अल-इखलास", "सूरह अल-काफिरून"],
+    es: ["Sura Al-Kawthar", "Sura Al-Asr", "Sura Al-Ikhlas", "Sura Al-Kafirun"]
+  },
+  ans: 2
+},
+{
+  // 10
+  q: {en:"How many juz are there in total in the Quran?", ur:"قرآن پاک میں کل کتنے پارے ہیں؟", ar:"كم عدد الأجزاء في القرآن الكريم؟", tr:"Kur'an'da toplam kaç cüz vardır?", fr:"Combien y a-t-il de juz au total dans le Coran?", de:"Wie viele Juz gibt es insgesamt im Koran?", id:"Ada berapa jumlah juz secara keseluruhan dalam Al-Qur'an?", bn:"পবিত্র কুরআনে মোট কতটি পারা আছে?", hi:"क़ुरआन में कुल कितने पारे हैं?", es:"¿Cuántos juz hay en total en el Corán?"},
+  opts: {
+    en: ["20", "25", "30", "40"],
+    ur: ["20", "25", "30", "40"],
+    ar: ["20", "25", "30", "40"],
+    tr: ["20", "25", "30", "40"],
+    fr: ["20", "25", "30", "40"],
+    de: ["20", "25", "30", "40"],
+    id: ["20", "25", "30", "40"],
+    bn: ["২০", "২৫", "৩০", "৪০"],
+    hi: ["20", "25", "30", "40"],
+    es: ["20", "25", "30", "40"]
+  },
+  ans: 2
+},
+{
+  // 11
+  q: {en:"How many manazil (manzara) are there in the Quran?", ur:"قرآن پاک میں کتنی منزلیں ہیں؟", ar:"كم عدد المنازل في القرآن الكريم؟", tr:"Kur'an'da kaç menzil vardır?", fr:"Combien de manazil y a-t-il dans le Coran?", de:"Wie viele Manazil gibt es im Koran?", id:"Berapa jumlah manazil (pembagian) dalam Al-Qur'an?", bn:"কুরআনে কতটি মনজিল আছে?", hi:"क़ुरआन में कुल कितनी मंजिलें हैं?", es:"¿Cuántas manazil hay en el Corán?"},
+  opts: {
+    en: ["5", "7", "10", "12"],
+    ur: ["5", "7", "10", "12"],
+    ar: ["5", "7", "10", "12"],
+    tr: ["5", "7", "10", "12"],
+    fr: ["5", "7", "10", "12"],
+    de: ["5", "7", "10", "12"],
+    id: ["5", "7", "10", "12"],
+    bn: ["৫", "৭", "১০", "১২"],
+    hi: ["5", "7", "10", "12"],
+    es: ["5", "7", "10", "12"]
+  },
+  ans: 1
+},
+{
+  // 12
+  q: {en:"How many verses of prostration (Sajdah) are there in the Quran?", ur:"قرآن پاک میں سجدہ تلاوت کی کتنی آیات ہیں؟", ar:"كم عدد آيات السجدة في القرآن الكريم؟", tr:"Kur'an'da kaç secde ayeti vardır?", fr:"Combien de versets de prosternation (Sajdah) y a-t-il dans le Coran?", de:"Wie viele Niederwerfungsverse (Sajdah) gibt es im Koran?", id:"Berapa jumlah ayat سجده (sujud) dalam Al-Qur'an?", bn:"কুরআনে সিজদার আয়াত কয়টি?", hi:"क़ुरआन में सजदे की कुल कितनी आयतें हैं?", es:"¿Cuántos versículos de postración hay en el Corán?"},
+  opts: {
+    en: ["12", "14", "15", "20"],
+    ur: ["12", "14", "15", "20"],
+    ar: ["12", "14", "15", "20"],
+    tr: ["12", "14", "15", "20"],
+    fr: ["12", "14", "15", "20"],
+    de: ["12", "14", "15", "20"],
+    id: ["12", "14", "15", "20"],
+    bn: ["১২", "১৪", "১৫", "২০"],
+    hi: ["12", "14", "15", "20"],
+    es: ["12", "14", "15", "20"]
+  },
+  ans: 1
+},
+{
+  // 13
+  q: {en:"Which surah contains the story of Prophet Solomon and takes its name from an insect?", ur:"کس سورت میں حضرت سلیمان کا ذکر ہے اور اس کا نام ایک کیڑے پر ہے؟", ar:"ما هي السورة التي تحتوي على قصة سليمان عليه السلام وسميت على اسم حشرة؟", tr:"Hz. Süleyman'ın kıssasını içeren ve adını bir böcekten alan sure hangisidir?", fr:"Quelle sourate contient l'histoire du prophète Salomon et tire son nom d'un insecte?", de:"Welche Sure enthält die Geschichte des Propheten Salomo und ist nach einem Insekt benannt?", id:"Surah apa yang berisi kisah Nabi Sulaiman dan dinamai dari seekor serangga?", bn:"কোন সূরায় হযরত সুলাইমানের কাহিনী আছে এবং এর নাম একটি পোকার নামে রাখা হয়েছে?", hi:"किस सूरत में हज़रत सुलेमान का ज़िक्र है और उसका नाम एक कीड़े पर है?", es:"¿Qué sura contiene la historia del profeta Salomón y toma su nombre de un insecto?"},
+  opts: {
+    en: ["Surah Al-Baqarah", "Surah An-Naml", "Surah An-Nahl", "Surah Al-Ankabut"],
+    ur: ["سورۃ البقرہ", "سورۃ النمل", "سورۃ النحل", "سورۃ العنکبوت"],
+    ar: ["سورة البقرة", "سورة النمل", "سورة النحل", "سورة العنكبوت"],
+    tr: ["Bakara Suresi", "Neml Suresi", "Nahl Suresi", "Ankebut Suresi"],
+    fr: ["Sourate Al-Baqarah", "Sourate An-Naml", "Sourate An-Nahl", "Sourate Al-Ankabut"],
+    de: ["Sure Al-Baqarah", "Sure An-Naml", "Sure An-Nahl", "Sure Al-Ankabut"],
+    id: ["Surat Al-Baqarah", "Surat An-Naml", "Surat An-Nahl", "Surat Al-'Ankabut"],
+    bn: ["সূরা আল-বাকারা", "সূরা আন-নামল", "সূরা আন-নাহল", "সূরা আল-আনকাবুত"],
+    hi: ["सूरह अल-बक़रा", "सूरह अन-नम्ल", "सूरह अन-नहल", "सूरह अल-अंकबूत"],
+    es: ["Sura Al-Baqarah", "Sura An-Naml", "Sura An-Nahl", "Sura Al-Ankabut"]
+  },
+  ans: 1
+},
+{
+  // 14
+  q: {en:"Which surah takes its name from a spider?", ur:"کس سورت کا نام مکڑی کے نام پر ہے؟", ar:"ما هي السورة التي سميت على اسم العنكبوت؟", tr:"Adını bir örümcekten alan sure hangisidir?", fr:"Quelle sourate tire son nom d'une araignée?", de:"Welche Sure ist nach einer Spinne benannt?", id:"Surah apa yang dinamai dari laba-laba?", bn:"কোন সূরার নাম মাকড়সার নামে রাখা হয়েছে?", hi:"किस सूरत का नाम मकड़ी पर है?", es:"¿Qué sura toma su nombre de una araña?"},
+  opts: {
+    en: ["Surah An-Naml", "Surah Al-Ankabut", "Surah Al-Baqarah", "Surah Al-Hadid"],
+    ur: ["سورۃ النمل", "سورۃ العنکبوت", "سورۃ البقرہ", "سورۃ الحديد"],
+    ar: ["سورة النمل", "سورة العنكبوت", "سورة البقرة", "سورة الحديد"],
+    tr: ["Neml Suresi", "Ankebut Suresi", "Bakara Suresi", "Hadid Suresi"],
+    fr: ["Sourate An-Naml", "Sourate Al-Ankabut", "Sourate Al-Baqarah", "Sourate Al-Hadid"],
+    de: ["Sure An-Naml", "Sure Al-Ankabut", "Sure Al-Baqarah", "Sure Al-Hadid"],
+    id: ["Surat An-Naml", "Surat Al-'Ankabut", "Surat Al-Baqarah", "Surat Al-Hadid"],
+    bn: ["সূরা আন-নামল", "সূরা আল-আনকাবুত", "সূরা আল-বাকারা", "সূরা আল-হাদিদ"],
+    hi: ["सूरह अन-नम्ल", "सूरह अल-अंकबूत", "सूरह अल-बक़रा", "सूरह अल-हदीद"],
+    es: ["Sura An-Naml", "Sura Al-Ankabut", "Sura Al-Baqarah", "Sura Al-Hadid"]
+  },
+  ans: 1
+},
+{
+  // 15
+  q: {en:"Which surah takes its name from a metal (iron)?", ur:"کس سورت کا نام دھات (لوہے) کے نام پر ہے؟", ar:"ما هي السورة التي سميت على اسم معدن (الحديد)؟", tr:"Adını bir metalden (demirden) alan sure hangisidir?", fr:"Quelle sourate tire son nom d'un métal (le fer)?", de:"Welche Sure ist nach einem Metall (Eisen) benannt?", id:"Surah apa yang dinamai dari nama logam (besi)?", bn:"কোন সূরার নাম একটি ধাতু (লোহা) থেকে নেওয়া হয়েছে?", hi:"किस सूरत का नाम धातु (लोहे) के नाम पर है?", es:"¿Qué sura toma su nombre de un metal (hierro)?"},
+  opts: {
+    en: ["Surah Al-Hadid", "Surah Al-Qamar", "Surah Al-Shams", "Surah Al-Insan"],
+    ur: ["سورۃ الحديد", "سورۃ القمر", "سورۃ الشمس", "سورۃ الإنسان"],
+    ar: ["سورة الحديد", "سورة القمر", "سورة الشمس", "سورة الإنسان"],
+    tr: ["Hadid Suresi", "Kamer Suresi", "Şems Suresi", "İnsan Suresi"],
+    fr: ["Sourate Al-Hadid", "Sourate Al-Qamar", "Sourate Al-Shams", "Sourate Al-Insan"],
+    de: ["Sure Al-Hadid", "Sure Al-Qamar", "Sure Al-Shams", "Sure Al-Insan"],
+    id: ["Surat Al-Hadid", "Surat Al-Qamar", "Surat Asy-Syams", "Surat Al-Insan"],
+    bn: ["সূরা আল-হাদিদ", "সূরা আল-ক্বামার", "সূরা আশ-শামস", "সূরা আল-ইনসান"],
+    hi: ["सूरह अल-हदीद", "सूरह अल-क़मर", "सूरह अश्-शम्स", "सूरह अल-इंसान"],
+    es: ["Sura Al-Hadid", "Sura Al-Qamar", "Sura Al-Shams", "Sura Al-Insan"]
+  },
+  ans: 0
+},
+{
+  // 16
+  q: {en:"Which surah was revealed completely at once?", ur:"کون سی سورت ایک ہی بار مکمل نازل ہوئی تھی؟", ar:"ما هي السورة التي نزلت كاملة دفعة واحدة؟", tr:"Hangi sure bir defada tamamen indirilmiştir?", fr:"Quelle sourate a été révélée entièrement en une seule fois?", de:"Welche Sure wurde komplett auf einmal offenbart?", id:"Surah apa yang diturunkan secara sekaligus?", bn:"কোন সূরাটি একবারে সম্পূর্ণ নাজিল হয়েছিল?", hi:"कौन सी सूरत एक ही बार में पूरी नाज़िल हुई थी?", es:"¿Qué sura fue revelada completamente de una vez?"},
+  opts: {
+    en: ["Surah Al-Fatiha", "Surah Al-Baqarah", "Surah Al-Muddathir", "Surah Al-An'am"],
+    ur: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ المدثر", "سورۃ الانعام"],
+    ar: ["سورة الفاتحة", "سورة البقرة", "سورة المدثر", "سورة الأنعام"],
+    tr: ["Fatiha Suresi", "Bakara Suresi", "Müddessir Suresi", "En'âm Suresi"],
+    fr: ["Sourate Al-Fatiha", "Sourate Al-Baqarah", "Sourate Al-Muddathir", "Sourate Al-An'am"],
+    de: ["Sure Al-Fatiha", "Sure Al-Baqarah", "Sure Al-Muddathir", "Sure Al-An'am"],
+    id: ["Surat Al-Fatiha", "Surat Al-Baqarah", "Surat Al-Muddathir", "Surat Al-An'am"],
+    bn: ["সূরা আল-ফাতিহা", "সূরা আল-বাকারা", "সূরা আল-মুদ্দাসসির", "সূরা আল-আনআম"],
+    hi: ["सूरह अल-फातिहा", "सूरह अल-बक़रा", "सूरह अल-मुद्दस्सिर", "सूरह अल-अनआम"],
+    es: ["Sura Al-Fatiha", "Sura Al-Baqarah", "Sura Al-Muddathir", "Sura Al-An'am"]
+  },
+  ans: 3
+},
+{
+  // 17
+  q: {en:"Which is the longest verse in the Quran?", ur:"قرآن پاک کی سب سے لمبی آیت کون سی ہے؟", ar:"ما هي أطول آية في القرآن الكريم؟", tr:"Kur'an'daki en uzun ayet hangisidir?", fr:"Quel est le plus long verset du Coran?", de:"Welches ist der längste Vers im Korans?", id:"Ayat apa yang paling panjang dalam Al-Qur'an?", bn:"কুরআনের দীর্ঘতম আয়াত কোনটি?", hi:"क़ुरआन की सबसे लंबी आयत कौन सी है?", es:"¿Cuál es el versículo más largo del Corán?"
   // ===== POOL 2: HADITH - حدیث =====
   hadith: {
     name: {en:"Hadith",ur:"حدیث",ar:"الحديث",tr:"Hadis",fr:"Hadith",de:"Hadith",id:"Hadis",bn:"হাদিস",hi:"हदीस",es:"Hadiz"},
