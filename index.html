@@ -374,4 +374,681 @@ window.playUrgent = function(){
 #levelCompleteModal.show{display:flex}
 .mashallah-box{text-align:center;animation:popIn 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);z-index:2}
 @keyframes popIn{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
-.mashallah-cap{font-size:80px;display:block;animation
+.mashallah-cap{font-size:80px;display:block;animation:bounce 0.8s infinite alternate}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+.mashallah-text{font-family:'Noto Nastaliq Urdu','Amiri',serif;font-size:52px;font-weight:800;background:linear-gradient(180deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mashallah-sub{color:#a7f3d0;font-size:18px;margin:10px 0 25px 0;font-family:Poppins}
+.mashallah-btn{background:linear-gradient(180deg,#FFD700,#FFB700);color:#000;border:none;padding:14px 40px;border-radius:50px;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 20px rgba(255,215,0,0.4)}
+#timer.danger{background:#ef4444!important;color:#fff!important;animation:shake 0.3s infinite}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+</style>
+
+
+<style>
+#splashTitle, .splashLogo {
+  animation: zoomOutPro 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+}
+@keyframes zoomOutPro {
+  0% { transform: scale(1.5) translateY(20px); opacity: 0; filter: blur(8px); }
+  15% { opacity: 1; filter: blur(0px); }
+  100% { transform: scale(1) translateY(0px); opacity: 1; }
+}
+</style>
+
+
+<style>
+/* Restrained correct-answer feedback: brief green highlight and check mark. */
+.opt.ok.correct-pulse{
+  position:relative;
+  overflow:hidden;
+  animation:correctAnswerPulse .65s ease-out;
+  box-shadow:0 0 0 2px rgba(34,197,94,.18),0 3px 12px rgba(34,197,94,.18);
+}
+.opt.ok.correct-pulse::after{
+  content:'✓';
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  margin-left:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,.22);
+  color:#fff;
+  font-weight:900;
+  animation:correctCheckIn .35s ease-out both;
+}
+@keyframes correctAnswerPulse{
+  0%{filter:brightness(1.18);transform:scale(1.01)}
+  100%{filter:brightness(1);transform:scale(1)}
+}
+@keyframes correctCheckIn{
+  from{opacity:0;transform:scale(.55)}
+  to{opacity:1;transform:scale(1)}
+}
+#answerConfetti,#levelConfetti{display:block!important}
+#answerConfetti{z-index:99998}
+#levelConfetti{z-index:1}
+.quiz-flower-petal{
+  position:absolute;
+  top:-9vh;
+  display:block;
+  pointer-events:none;
+  line-height:1;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));
+  animation:quizPetalFall 1.8s ease-in forwards;
+  will-change:transform,opacity;
+}
+@keyframes quizPetalFall{
+  0%{transform:translate3d(0,-4vh,0) rotate(0deg) scale(.75);opacity:0}
+  12%{opacity:1}
+  100%{transform:translate3d(var(--drift),112vh,0) rotate(540deg) scale(1.08);opacity:.08}
+}
+</style>
+
+</head>
+<body class="lang-en">
+<div id="splash"><div class="splashLogo" id="splashTitle"><span class="line1">CLICK ISLAMIC</span><span class="line2">QUIZ GAME</span></div></div>
+<div class="app">
+<button id="soundBtn" onclick="toggleSound()">🔊</button>
+<div id="langModal" onclick="if(event.target===this) closeLangModal()"><div id="langList">
+<div class="langOption" data-lang="en" onclick="selectLang('en')"><span style="color:#111">🇺🇸 English</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="ur" onclick="selectLang('ur')"><span style="color:#111">🇵🇰 اردو</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="ar" onclick="selectLang('ar')"><span style="color:#111">🇸🇦 العربية</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="tr" onclick="selectLang('tr')"><span style="color:#111">🇹🇷 Türkçe</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="fr" onclick="selectLang('fr')"><span style="color:#111">🇫🇷 Français</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="de" onclick="selectLang('de')"><span style="color:#111">🇩🇪 Deutsch</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="es" onclick="selectLang('es')"><span style="color:#111">🇪🇸 Español</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="bn" onclick="selectLang('bn')"><span style="color:#111">🇧🇩 বাংলা</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="hi" onclick="selectLang('hi')"><span style="color:#111">🇮🇳 हिंदी</span><span class="check">✓</span></div>
+<div class="langOption" data-lang="id" onclick="selectLang('id')"><span style="color:#111">🇮🇩 Indonesia</span><span class="check">✓</span></div>
+</div></div>
+
+<div id="pageModal" onclick="if(event.target===this) closePage()"><div id="pageBox"><h2 id="pageTitle"></h2><div id="pageContent"></div><button onclick="closePage()" style="margin-top:16px;width:100%;padding:10px;border-radius:10px;border:none;background:#111;color:#fff;font-family:Poppins;font-weight:600">Close</button></div></div>
+
+<div class="content">
+<div id="homePage">
+<div><button id="customLangBtn" onclick="openLangModal()"><span id="customLangFlag">🇺🇸</span><span id="customLangName">English</span><span>▼</span></button></div>
+<h1 class="logo" id="homeTitle"><span class="line1">CLICK ISLAMIC</span><span class="line2">QUIZ GAME</span></h1>
+<p id="homeTopics">Quran • Hadith • Prophets • Prayer • Zakat</p>
+<p id="homeLevels">10 TOPICS PER LEVEL • 100 LEVELS</p>
+<div style="text-align:center;margin:18px 15px;padding:10px 12px;background:rgba(255,215,0,0.08);border:1px dashed rgba(255,215,0,0.3);border-radius:10px;">
+<p id="homeDesc" style="margin:0;font-size:13px;line-height:1.6;color:#FFD700;font-weight:500;font-family:Poppins">Madrasas, Schools, Tests & Islamic competitions - 1000 questions treasure!</p>
+</div>
+<button class="mainBtn" id="startBtn" onclick="showLevels()">▶️ Start Playing</button>
+<button class="mainBtn" id="allLevelsBtn" onclick="showLevels()">🎮 All Levels (100)</button>
+<button id="resetBtn" onclick="resetProgress()">🔄 Reset Game</button>
+</div>
+<div id="levelPage">
+<div class="levelHeader">
+<button onclick="showHome()" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:9px 16px;border-radius:50px;font-weight:800">⬅️ Back</button>
+<h2 id="levelsTitle" style="color:#ffd700;font-size:24px;font-family:Poppins">Levels</h2>
+<span style="color:#a7f3d0">100</span>
+</div>
+<div id="levelGrid"></div>
+<!-- AD-PLACE 1: BANNER AD - LEVEL PAGE KE NEECHE - Level 31+ - 3 mahine baad -->
+<!-- YAHAN BANNER AD LAGANA HAI -->
+<!-- AdMob: <div><script>admob banner</script></div> -->
+<!-- Facebook: <div><script>fb banner</script></div> -->
+<div id="ad-level-banner" style="display:none">Banner Ad Placeholder - 3 mahine baad show hoga</div>
+</div>
+<div id="quizPage">
+<div class="stats">
+<span style="color:white">Level: <b id="levelNo" style="color:#ffd700">1</b></span>
+<span id="timer">10</span>
+<span style="color:white">Q: <b id="qCount">1/10</b></span>
+</div>
+<div id="barWrap"><div id="bar"></div></div>
+<div class="qBox">
+<div id="catBadge">...</div>
+<div id="q">Loading...</div>
+<div id="list"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="siteFooter">
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:12px;font-size:11px;">
+<span style="color:#FFD700" onclick="openPage('privacy')">Privacy Policy</span><span onclick="openPage('terms')">Terms</span><span onclick="openPage('about')">About Us</span><span onclick="openPage('contact')">Contact Us</span>
+</div>
+<div style="margin-top:6px;font-size:10px;color:#666;font-family:Poppins">© 2026 Click Islamic Quiz Game</div>
+<!-- AD-PLACE 4: HOME BANNER - FOOTER KE UPAR - 3 mahine baad -->
+<!-- YAHAN HOME BANNER AD LAGANA HAI -->
+</div>
+
+<script>
+// =================================================================
+// DEVELOPER GUIDE - Click Islamic Quiz Game
+// Author: Abdul Salam | 100% Offline | 30 Levels Offline
+// =================================================================
+// 1. OFFLINE LIMIT:
+//    const OFFLINE_LIMIT = 30; // 30 tak offline, 31 se ads
+//    Agar 40 tak offline chahen to 30 ki jagah 40 likh dein
+
+// 2. POOL ADD KARNE KA TARIKA (Example):
+//    pools object me naya pool add karein:
+//    namaz: {
+//      name: {en:"Namaz", ur:"نماز", ar:"الصلاة", tr:"Namaz", fr:"Prière", de:"Gebet", id:"Sholat", bn:"নামাজ", hi:"नमाज़", es:"Oración"},
+//      qs: [
+//        {q:{en:"Question?", ur:"سوال؟", ar:"سؤال؟", tr:"Soru?", fr:"Question?", de:"Frage?", id:"Pertanyaan?", bn:"প্রশ্ন?", hi:"प्रश्न?", es:"¿Pregunta?"}, 
+//         opts:{en:["A","B","C","D"], ur:["A","B","C","D"], ar:["A","B","C","D"], tr:["A","B","C","D"], fr:["A","B","C","D"], de:["A","B","C","D"], id:["A","B","C","D"], bn:["A","B","C","D"], hi:["A","B","C","D"], es:["A","B","C","D"]}, 
+//         ans:0}
+//      ]
+//    }
+//    Pool naam: english chhota, bina space (wuzu, roza, hajj, zakat, seerat)
+
+// 3. ADS KAHAN LAGANE HAIN (3 mahine baad):
+//    AD-PLACE 1: Level Page Banner - #levelGrid ke baad
+//    AD-PLACE 2: Interstitial - showInterstitialAd() function me (Level complete ke baad)
+//    AD-PLACE 3: Rewarded - showRewardedAdForHint() function me (Hint ke liye)
+//    AD-PLACE 4: Home Banner - Footer se upar
+//    Abhi adsEnabled = false hai, 3 mahine baad true kar dein
+
+// 4. LEVELS BADHANA:
+//    100 se 150 ya 200 karne ke liye: for loop me 100 ki jagah 200
+//    Aur pools me aur sawal add karte jayen
+
+// 5. SOUND FIX: Tick sound har second
+// =================================================================
+
+const OFFLINE_LIMIT = 30;
+let adsEnabled = false; // 3 mahine baad true karna
+
+// POOLS - 100% OFFLINE - 10 ZABAN
+
+const pools = {
+  // ===== POOL 1: QURAN - قرآن =====
+  quran: {
+    name: {en:"The Qur'an",ur:"القرآن",ar:"القرآن",tr:"Kur'an",fr:"Coran",de:"Koran",id:"Al-Qur'an",bn:"আল-কুরআন",hi:"क़ुरआन",es:"El Corán"},
+    qs: [
+      {q:{en:"How many Surahs in Holy Quran?",ur:"قرآن پاک میں کتنی سورتیں ہیں؟",ar:"كم عدد سور القرآن؟",tr:"Kur'an'da kaç sure var?",fr:"Combien de sourates dans le Coran?",de:"Wie viele Suren im Koran?",id:"Berapa surah dalam Al-Qur'an?",bn:"পবিত্র কুরআনে কতটি সূরা?",hi:"क़ुरआन में कितनी सूरतें?",es:"¿Cuántas suras en el Corán?"},opts:{en:["112","114","116","118"],ur:["112","114","116","118"],ar:["112","114","116","118"],tr:["112","114","116","118"],fr:["112","114","116","118"],de:["112","114","116","118"],id:["112","114","116","118"],bn:["112","114","116","118"],hi:["112","114","116","118"],es:["112","114","116","118"]},ans:1},
+      // YAHAN QURAN KE BAQI 9 SAWAL ADD KAREIN - Level 2-10 ke liye
+      // {q:{en:"...",ur:"...",...},opts:{en:[...],ur:[...],...},ans:0},
+    ]
+  },
+  // ===== POOL 2: HADITH - حدیث =====
+  hadith: {
+    name: {en:"Hadith",ur:"حدیث",ar:"الحديث",tr:"Hadis",fr:"Hadith",de:"Hadith",id:"Hadis",bn:"হাদিস",hi:"हदीस",es:"Hadiz"},
+    qs: [
+      {q:{en:"How many books in Kutub al-Sittah?",ur:"کتب ستہ میں کتنی کتابیں ہیں؟",ar:"كم عدد كتب الكتب الستة؟",tr:"Kütüb-i Sitte'de kaç kitap var?",fr:"Combien de livres dans Kutub al-Sittah?",de:"Wie viele Bücher in Kutub al-Sittah?",id:"Berapa kitab dalam Kutub Sittah?",bn:"কুতুব আল-সিত্তাহতে কতটি বই?",hi:"कुतुब सित्ता में कितनी किताबें?",es:"¿Cuántos libros en Kutub al-Sittah?"},opts:{en:["4","6","8","10"],ur:["4","6","8","10"],ar:["4","6","8","10"],tr:["4","6","8","10"],fr:["4","6","8","10"],de:["4","6","8","10"],id:["4","6","8","10"],bn:["4","6","8","10"],hi:["4","6","8","10"],es:["4","6","8","10"]},ans:1},
+      // YAHAN HADITH KE BAQI 9 SAWAL ADD KAREIN
+    ]
+  },
+  // ===== POOL 3: SEERAT - سیرت =====
+  seerat: {
+    name: {en:"Seerah",ur:"سیرت",ar:"السيرة",tr:"Siyer",fr:"Sîra",de:"Sira",id:"Sirah",bn:"সিরাত",hi:"सीरत",es:"Sira"},
+    qs: [
+      {q:{en:"In which year Prophet Muhammad (PBUH) was born?",ur:"نبی کریم ﷺ کس سال پیدا ہوئے؟",ar:"في أي سنة ولد النبي محمد ﷺ؟",tr:"Hz. Muhammed (sav) hangi yılda doğdu?",fr:"En quelle année le Prophète est-il né?",de:"In welchem Jahr wurde der Prophet geboren?",id:"Tahun berapa Nabi Muhammad lahir?",bn:"নবী মুহাম্মদ (সাঃ) কোন সালে জন্মগ্রহণ করেন?",hi:"पैगंबर मुहम्मद किस साल पैदा हुए?",es:"¿En qué año nació el Profeta?"},opts:{en:["570","571","572","573"],ur:["570","571","572","573"],ar:["570","571","572","573"],tr:["570","571","572","573"],fr:["570","571","572","573"],de:["570","571","572","573"],id:["570","571","572","573"],bn:["570","571","572","573"],hi:["570","571","572","573"],es:["570","571","572","573"]},ans:1},
+      // YAHAN SEERAT KE BAQI 9 SAWAL
+    ]
+  },
+  // ===== POOL 4: FIQH - فقہ =====
+  fiqh: {
+    name: {en:"Fiqh",ur:"فقہ",ar:"الفقه",tr:"Fıkıh",fr:"Fiqh",de:"Fiqh",id:"Fiqih",bn:"ফিকহ",hi:"फ़िक़्ह",es:"Fiqh"},
+    qs: [
+      {q:{en:"How many Fardh in Wudu?",ur:"وضو میں کتنے فرض ہیں؟",ar:"كم عدد فرائض الوضوء؟",tr:"Abdestte kaç farz var?",fr:"Combien de farz dans le wudu?",de:"Wie viele Fardh im Wudu?",id:"Berapa fardhu wudhu?",bn:"ওযুতে কত ফরজ?",hi:"वुज़ू में कितने फ़र्ज़?",es:"¿Cuántos fard en el wudu?"},opts:{en:["3","4","5","6"],ur:["3","4","5","6"],ar:["3","4","5","6"],tr:["3","4","5","6"],fr:["3","4","5","6"],de:["3","4","5","6"],id:["3","4","5","6"],bn:["3","4","5","6"],hi:["3","4","5","6"],es:["3","4","5","6"]},ans:1},
+      // BAQI 9 SAWAL
+    ]
+  },
+  // ===== POOL 5: TAWHEED - توحید =====
+  tawheed: {
+    name: {en:"Tawheed",ur:"توحید",ar:"التوحيد",tr:"Tevhid",fr:"Tawhid",de:"Tawhid",id:"Tauhid",bn:"তাওহীদ",hi:"तौहीद",es:"Tawhid"},
+    qs: [
+      {q:{en:"How many types of Tawheed?",ur:"توحید کی کتنی اقسام ہیں؟",ar:"كم أنواع التوحيد؟",tr:"Tevhid kaç çeşittir?",fr:"Combien de types de Tawhid?",de:"Wie viele Arten von Tawhid?",id:"Berapa jenis Tauhid?",bn:"তাওহীদের কত প্রকার?",hi:"तौहीद के कितने प्रकार?",es:"¿Cuántos tipos de Tawhid?"},opts:{en:["2","3","4","5"],ur:["2","3","4","5"],ar:["2","3","4","5"],tr:["2","3","4","5"],fr:["2","3","4","5"],de:["2","3","4","5"],id:["2","3","4","5"],bn:["2","3","4","5"],hi:["2","3","4","5"],es:["2","3","4","5"]},ans:1},
+    ]
+  },
+  // ===== POOL 6: NAMAZ - نماز =====
+  namaz: {
+    name: {en:"Namaz",ur:"نماز",ar:"الصلاة",tr:"Namaz",fr:"Prière",de:"Gebet",id:"Sholat",bn:"নামাজ",hi:"नमाज़",es:"Oración"},
+    qs: [
+      {q:{en:"How many daily prayers?",ur:"روزانہ کتنی نمازیں فرض ہیں؟",ar:"كم عدد الصلوات اليومية؟",tr:"Günde kaç namaz farz?",fr:"Combien de prières quotidiennes?",de:"Wie viele tägliche Gebete?",id:"Berapa sholat harian?",bn:"দৈনিক কত নামাজ?",hi:"रोज़ाना कितनी नमाज़ें?",es:"¿Cuántas oraciones diarias?"},opts:{en:["3","5","4","6"],ur:["3","5","4","6"],ar:["3","5","4","6"],tr:["3","5","4","6"],fr:["3","5","4","6"],de:["3","5","4","6"],id:["3","5","4","6"],bn:["3","5","4","6"],hi:["3","5","4","6"],es:["3","5","4","6"]},ans:1},
+    ]
+  },
+  // ===== POOL 7: ROZA - روزہ =====
+  roza: {
+    name: {en:"Fasting",ur:"روزہ",ar:"الصوم",tr:"Oruç",fr:"Jeûne",de:"Fasten",id:"Puasa",bn:"রোজা",hi:"रोज़ा",es:"Ayuno"},
+    qs: [
+      {q:{en:"In which month fasting is obligatory?",ur:"روزہ کس مہینے میں فرض ہے؟",ar:"في أي شهر الصوم فرض؟",tr:"Oruç hangi ayda farz?",fr:"En quel mois le jeûne est obligatoire?",de:"In welchem Monat Fasten Pflicht?",id:"Bulan apa puasa wajib?",bn:"কোন মাসে রোজা ফরজ?",hi:"किस महीने रोज़ा फ़र्ज़?",es:"¿En qué mes ayuno obligatorio?"},opts:{en:["Rajab","Shaban","Ramadan","Shawwal"],ur:["رجب","شعبان","رمضان","شوال"],ar:["رجب","شعبان","رمضان","شوال"],tr:["Recep","Şaban","Ramazan","Şevval"],fr:["Rajab","Chaabane","Ramadan","Chawwal"],de:["Rajab","Shaban","Ramadan","Shawwal"],id:["Rajab","Sya'ban","Ramadhan","Syawal"],bn:["রজব","শাবান","রমজান","শাওয়াল"],hi:["रजब","शाबान","रमज़ान","शव्वाल"],es:["Rajab","Shaban","Ramadán","Shawwal"]},ans:2},
+    ]
+  },
+  // ===== POOL 8: ZAKAT - زکوٰۃ =====
+  zakat: {
+    name: {en:"Zakat",ur:"زکوٰۃ",ar:"الزكاة",tr:"Zekat",fr:"Zakat",de:"Zakat",id:"Zakat",bn:"যাকাত",hi:"ज़कात",es:"Zakat"},
+    qs: [
+      {q:{en:"Zakat is what pillar of Islam?",ur:"زکوٰۃ اسلام کا کون سا رکن ہے؟",ar:"الزكاة أي ركن من الإسلام؟",tr:"Zekat İslam'ın kaçıncı şartı?",fr:"Zakat est quel pilier?",de:"Zakat welche Säule?",id:"Zakat rukun ke berapa?",bn:"যাকাত ইসলামের কত নম্বর স্তম্ভ?",hi:"ज़कात इस्लाम का कौन सा रुक्न?",es:"¿Qué pilar es Zakat?"},opts:{en:["2nd","3rd","4th","5th"],ur:["دوسرا","تیسرا","چوتھا","پانچواں"],ar:["الثاني","الثالث","الرابع","الخامس"],tr:["2.","3.","4.","5."],fr:["2e","3e","4e","5e"],de:["2.","3.","4.","5."],id:["2","3","4","5"],bn:["২য়","৩য়","৪র্থ","৫ম"],hi:["दूसरा","तीसरा","चौथा","पांचवां"],es:["2º","3º","4º","5º"]},ans:2},
+    ]
+  },
+  // ===== POOL 9: HAJJ - حج =====
+  hajj: {
+    name: {en:"Hajj",ur:"حج",ar:"الحج",tr:"Hac",fr:"Hajj",de:"Hadsch",id:"Haji",bn:"হজ",hi:"हज",es:"Hayy"},
+    qs: [
+      {q:{en:"Hajj is obligatory how many times in life?",ur:"حج زندگی میں کتنی بار فرض ہے؟",ar:"كم مرة الحج فرض في العمر؟",tr:"Hac ömürde kaç kez farz?",fr:"Combien fois Hajj obligatoire?",de:"Wie oft Hadsch Pflicht?",id:"Berapa kali haji wajib?",bn:"জীবনে কতবার হজ ফরজ?",hi:"ज़िंदगी में कितनी बार हज फ़र्ज़?",es:"¿Cuántas veces Hajj obligatorio?"},opts:{en:["1","2","3","Every year"],ur:["1","2","3","ہر سال"],ar:["1","2","3","كل سنة"],tr:["1","2","3","Her yıl"],fr:["1","2","3","Chaque année"],de:["1","2","3","Jedes Jahr"],id:["1","2","3","Setiap tahun"],bn:["1","2","3","প্রতি বছর"],hi:["1","2","3","हर साल"],es:["1","2","3","Cada año"]},ans:0},
+    ]
+  },
+  // ===== POOL 10: AKHLAQ - اخلاق =====
+  akhlaq: {
+    name: {en:"Akhlaq",ur:"اخلاق",ar:"الأخلاق",tr:"Ahlak",fr:"Morale",de:"Moral",id:"Akhlak",bn:"আখলাক",hi:"अख़लाक़",es:"Moral"},
+    qs: [
+      {q:{en:"Which is best Akhlaq according to Hadith?",ur:"حدیث کے مطابق بہترین اخلاق کون سا ہے؟",ar:"أي خلق أفضل حسب الحديث؟",tr:"Hadise göre en iyi ahlak?",fr:"Quelle meilleure morale selon Hadith?",de:"Welches beste Moral laut Hadith?",id:"Akhlak terbaik menurut Hadis?",bn:"হাদিস অনুযায়ী সর্বোত্তম আখলাক?",hi:"हदीस के मुताबिक बेहतरीन अख़लाक़?",es:"¿Cuál mejor moral según Hadiz?"},opts:{en:["Honesty","Kindness","Patience","Truth"],ur:["سچائی","مہربانی","صبر","دیانت"],ar:["الصدق","الرحمة","الصبر","الأمانة"],tr:["Doğruluk","Nezaket","Sabır","Dürüstlük"],fr:["Honnêteté","Gentillesse","Patience","Vérité"],de:["Ehrlichkeit","Freundlichkeit","Geduld","Wahrheit"],id:["Kejujuran","Kebaikan","Kesabaran","Kebenaran"],bn:["সততা","দয়া","ধৈর্য","সত্য"],hi:["सच्चाई","दयालुता","सब्र","सत्य"],es:["Honestidad","Bondad","Paciencia","Verdad"]},ans:0},
+    ]
+  }
+};
+
+
+// FULL TRANSLATIONS
+const fullTranslations = {
+  en: {topics:"Quran • Hadith • Prophets • Prayer • Zakat",levels:"10 TOPICS PER LEVEL • 100 LEVELS",desc:"Madrasas, Schools, Tests & Islamic competitions - 1000 questions treasure!",privacy:"Privacy Policy",terms:"Terms & Conditions",about:"About Us",contact:"Contact Us",start:"Start Playing",all:"All Levels (100)",reset:"🔄 Reset Game"},
+  ur: {topics:"قرآن • حدیث • انبیاء • نماز • زکوٰۃ",levels:"ہر لیول میں 10 موضوعات • 100 لیولز",desc:"مدارس، اسکولز، ٹیسٹ اور اسلامی مقابلے - 1000 سوالات کا خزانہ!",privacy:"پرائیویسی پالیسی",terms:"شرائط و ضوابط",about:"ہمارے بارے میں",contact:"رابطہ کریں",start:"کھیلنا شروع کریں",all:"تمام لیولز (100)",reset:"🔄 گیم ری سیٹ"},
+  ar: {topics:"القرآن • الحديث • الأنبياء • الصلاة • الزكاة",levels:"10 مواضيع لكل مستوى • 100 مستوى",desc:"المدارس والمدارس والاختبارات والمسابقات الإسلامية - كنز 1000 سؤال!",privacy:"سياسة الخصوصية",terms:"الشروط والأحكام",about:"معلومات عنا",contact:"اتصل بنا",start:"ابدأ اللعب",all:"جميع المستويات (100)",reset:"🔄 إعادة ضبط"},
+  tr: {topics:"Kur'an • Hadis • Peygamberler • Namaz • Zekat",levels:"Seviye başına 10 konu • 100 seviye",desc:"Medreseler, Okullar, Testler ve İslami yarışmalar - 1000 soruluk hazine!",privacy:"Gizlilik Politikası",terms:"Şartlar ve Koşullar",about:"Hakkımızda",contact:"İletişim",start:"Oyuna Başla",all:"Tüm Seviyeler (100)",reset:"🔄 Sıfırla"},
+  fr: {topics:"Coran • Hadith • Prophètes • Prière • Zakat",levels:"10 sujets par niveau • 100 niveaux",desc:"Madrasas, Écoles, Tests et compétitions islamiques - Trésor de 1000 questions!",privacy:"Politique de confidentialité",terms:"Termes et conditions",about:"À propos",contact:"Contact",start:"Commencer",all:"Tous les niveaux (100)",reset:"🔄 Réinitialiser"},
+  de: {topics:"Koran • Hadith • Propheten • Gebet • Zakat",levels:"10 Themen pro Level • 100 Level",desc:"Madrasas, Schulen, Tests & Islamische Wettbewerbe - 1000 Fragen Schatz!",privacy:"Datenschutzrichtlinie",terms:"Allgemeine Geschäftsbedingungen",about:"Über uns",contact:"Kontakt",start:"Spiel starten",all:"Alle Level (100)",reset:"🔄 Zurücksetzen"},
+  es: {topics:"Corán • Hadith • Profetas • Oración • Zakat",levels:"10 temas por nivel • 100 niveles",desc:"Madrasas, Escuelas, Pruebas y competencias islámicas - ¡Tesoro de 1000 preguntas!",privacy:"Política de privacidad",terms:"Términos y condiciones",about:"Sobre nosotros",contact:"Contacto",start:"Empezar",all:"Todos los niveles (100)",reset:"🔄 Reiniciar"},
+  bn: {topics:"কুরআন • হাদিস • নবী • নামাজ • যাকাত",levels:"প্রতি স্তরে 10 টি বিষয় • 100 স্তর",desc:"মাদ্রাসা, স্কুল, পরীক্ষা ও ইসলামী প্রতিযোগিতা - 1000 প্রশ্নের ভান্ডার!",privacy:"গোপনীয়তা নীতি",terms:"শর্তাবলী",about:"আমাদের সম্পর্কে",contact:"যোগাযোগ",start:"খেলা শুরু",all:"সমস্ত স্তর (100)",reset:"🔄 রিসেট"},
+  hi: {topics:"क़ुरआन • हदीस • नबी • नमाज़ • ज़कात",levels:"प्रति स्तर 10 विषय • 100 स्तर",desc:"मदरसे, स्कूल, टेस्ट और इस्लामी प्रतियोगिताएं - 1000 सवालों का खजाना!",privacy:"गोपनीयता नीति",terms:"नियम और शर्तें",about:"हमारे बारे में",contact:"संपर्क",start:"खेलना शुरू करें",all:"सभी स्तर (100)",reset:"🔄 रीसेट"},
+  id: {topics:"Qur'an • Hadis • Nabi • Sholat • Zakat",levels:"10 topik per level • 100 level",desc:"Madrasah, Sekolah, Tes & Kompetisi Islami - Harta karun 1000 pertanyaan!",privacy:"Kebijakan Privasi",terms:"Syarat dan Ketentuan",about:"Tentang Kami",contact:"Hubungi Kami",start:"Mulai",all:"Semua Level (100)",reset:"🔄 Reset"}
+};
+
+const policyText={
+  privacy:{title:"Privacy Policy",content:"<p>This app is 100% offline. We do not collect any personal data.</p><p>No internet required for first 30 levels.</p><p>All questions are stored locally.</p><p>Contact: personalniazi9@gmail.com</p>"},
+  terms:{title:"Terms & Conditions",content:"<p>By using this app, you agree to use it for educational purposes.</p><p>Content is for Islamic learning.</p>"},
+  about:{title:"About Us",content:"<p>Click Islamic Quiz Game - 100 Levels of Islamic knowledge.</p><p>Made for Madrasas, Schools and Islamic competitions.</p><p>Developer: Abdul Salam from Pind Kamala, Paharpur, Pakistan.</p>"},
+  contact:{title:"Contact Us",content:"<p>Email: personalniazi9@gmail.com</p><p>Instagram: @personalniazi9</p><p>Facebook: Abdul Salam</p>"}
+};
+
+let currentLang='en', unlocked=parseInt(localStorage.getItem("noor_mixed_final")||"1"), curLevel=0, curQ=0, score=0, timerInt=null, timeLeft=10;
+let audioCtx=null, soundOn=true;
+function initAudio(){ if(!audioCtx){ try{ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } }
+function playTone(f,d,t,v){ if(!soundOn) return; initAudio(); if(!audioCtx) return; try{ var o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.type=t||'sine'; o.frequency.value=f; o.connect(g); g.connect(audioCtx.destination); g.gain.setValueAtTime(v||0.3, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+d); o.start(); o.stop(audioCtx.currentTime+d);}catch(e){} }
+function playCorrect(){ playTone(523,0.15,'sine',0.4); setTimeout(()=>playTone(659,0.15,'sine',0.4),120); setTimeout(()=>playTone(784,0.3,'sine',0.5),240); }
+function playWrong(){ playTone(200,0.4,'sawtooth',0.3); }
+function playFlip(){ playTone(600,0.08,'triangle',0.2); }
+// FIX: Tick sound restored
+function playTick(){ playTone(800,0.06,'sine',0.15); }
+function toggleSound(){ soundOn=!soundOn; document.getElementById("soundBtn").innerText=soundOn?"🔊":"🔇"; localStorage.setItem("soundOn",soundOn?"1":"0"); if(soundOn){initAudio(); playCorrect();} }
+let savedSound=localStorage.getItem("soundOn"); if(savedSound==="0"){ soundOn=false; setTimeout(()=>{ document.getElementById("soundBtn").innerText="🔇"; },100); }
+
+function tObj(obj){ if(!obj) return ""; if(typeof obj==='string') return obj; return obj[currentLang] || obj['en'] || Object.values(obj)[0]; }
+
+function applyLanguage(lang){
+  if(!fullTranslations[lang]) lang='en';
+  currentLang=lang;
+  localStorage.setItem("appLang",lang);
+  document.body.className='lang-'+lang;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=(lang==='ur'||lang==='ar')?'rtl':'ltr';
+  const t=fullTranslations[lang];
+  const sTitle=document.getElementById('splashTitle');
+  const hTitle=document.getElementById('homeTitle');
+  if(lang==='ur'){
+    if(sTitle) sTitle.innerHTML='<span style="font-family:Noto Nastaliq Urdu">کلک اسلامک کوئزگیم</span>';
+    if(hTitle) hTitle.innerHTML='<span style="font-family:Noto Nastaliq Urdu">کلک اسلامک کوئزگیم</span>';
+  } else {
+    if(sTitle) sTitle.innerHTML='<span class="line1">CLICK ISLAMIC</span><span class="line2">QUIZ GAME</span>';
+    if(hTitle) hTitle.innerHTML='<span class="line1">CLICK ISLAMIC</span><span class="line2">QUIZ GAME</span>';
+  }
+  let el=document.getElementById('homeTopics'); if(el) el.textContent=t.topics;
+  el=document.getElementById('homeLevels'); if(el) el.textContent=t.levels;
+  el=document.getElementById('homeDesc'); if(el) el.textContent=t.desc;
+  el=document.getElementById('startBtn'); if(el) el.textContent='▶️ '+t.start;
+  el=document.getElementById('allLevelsBtn'); if(el) el.textContent='🎮 '+t.all;
+  el=document.getElementById('resetBtn'); if(el) el.textContent=t.reset;
+  let lt=document.getElementById('levelsTitle'); if(lt) lt.textContent='Levels';
+  updateLangChecks();
+}
+
+function openLangModal(){ document.getElementById('langModal').classList.add('show'); updateLangChecks(); }
+function closeLangModal(){ document.getElementById('langModal').classList.remove('show'); }
+function updateLangChecks(){
+  const cur=currentLang;
+  document.querySelectorAll('.langOption').forEach(o=>{
+    if(o.getAttribute('data-lang')===cur) o.classList.add('selected'); else o.classList.remove('selected');
+  });
+  const names={en:['🇺🇸','English'],ur:['🇵🇰','اردو'],ar:['🇸🇦','العربية'],tr:['🇹🇷','Türkçe'],fr:['🇫🇷','Français'],de:['🇩🇪','Deutsch'],es:['🇪🇸','Español'],bn:['🇧🇩','বাংলা'],hi:['🇮🇳','हिंदी'],id:['🇮🇩','Indonesia']};
+  let f=document.getElementById('customLangFlag'), n=document.getElementById('customLangName');
+  if(f&&n&&names[cur]){ f.textContent=names[cur][0]; n.textContent=names[cur][1]; }
+}
+function selectLang(lang){
+  closeLangModal();
+  applyLanguage(lang);
+  const toast=document.createElement('div');
+  toast.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:10px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:9999999;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3)';
+  toast.innerHTML='<span style="background:#fff;color:#22c55e;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900">✓</span> '+(lang==='ur'?'زبان تبدیل ✓':'Language ✓');
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(),1800);
+}
+
+function openPage(key){
+  let data=policyText[key];
+  if(!data) return;
+  document.getElementById('pageTitle').textContent=data.title;
+  document.getElementById('pageContent').innerHTML=data.content;
+  document.getElementById('pageModal').classList.add('show');
+  playFlip();
+}
+function closePage(){ document.getElementById('pageModal').classList.remove('show'); }
+
+function hideAll(){ ['homePage','levelPage','quizPage'].forEach(id=>{ let e=document.getElementById(id); if(e) e.style.display='none'; }); }
+function showHome(){ hideAll(); document.getElementById('homePage').style.display='block'; }
+function showLevels(){ initAudio(); hideAll(); document.getElementById('levelPage').style.display='flex'; renderLevels(); playFlip(); }
+function renderLevels(){
+  let g=document.getElementById('levelGrid'); g.innerHTML='';
+  for(let i=0;i<100;i++){
+    let d=document.createElement('div');
+    let num=i+1, isFirst=i===0, isUnlocked=isFirst||num<=unlocked, isComp=num<unlocked;
+    if(isFirst){ d.className='levelCard firstLevel'; d.innerHTML='▶️<br><small style="font-size:16px;font-weight:900">'+num+'</small>'; }
+    else if(isComp){ d.className='levelCard completed'; d.innerHTML='✓<br><small>'+num+'</small>'; }
+    else if(isUnlocked){ d.className='levelCard unlocked'; d.innerHTML=num; }
+    else{ d.className='levelCard locked'; d.innerHTML='🔒<br><small>'+num+'</small>'; }
+    if(isUnlocked){ d.onclick=(()=>{ let x=i; return ()=>startLevel(x); })(); }
+    g.appendChild(d);
+  }
+}
+function startLevel(idx){
+  initAudio(); curLevel=idx; curQ=0; score=0;
+  hideAll(); document.getElementById('quizPage').style.display='flex';
+  document.getElementById('levelNo').innerText=idx+1;
+  showQuestion(); playFlip();
+}
+function showQuestion(){
+  let poolNames=Object.keys(pools);
+  let poolName=poolNames[curQ % poolNames.length];
+  let pool=pools[poolName];
+  let qData=pool.qs[curLevel % pool.qs.length];
+  if(!qData){ levelComplete(); return; }
+  document.getElementById('qCount').innerText=(curQ+1)+'/10';
+  let catBadge=document.getElementById('catBadge');
+  if(catBadge) catBadge.textContent=tObj(pool.name);
+  let qEl=document.getElementById('q');
+  if(qEl) qEl.textContent=tObj(qData.q);
+  let listEl=document.getElementById('list'); listEl.innerHTML='';
+  timeLeft=10;
+  document.getElementById('timer').innerText=timeLeft;
+  document.getElementById('bar').style.width='100%';
+  let correctIndex=qData.ans;
+  let optsArray = qData.opts[currentLang] || qData.opts['en'] || Object.values(qData.opts)[0];
+  if(!Array.isArray(optsArray)) optsArray = Object.values(qData.opts)[0];
+  for(let i=0;i<optsArray.length;i++){
+    let el=document.createElement('div');
+    el.className='opt';
+    el.innerHTML='<span>'+optsArray[i]+'</span><span style="background:#e2e8f0;min-width:28px;height:28px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:12px">'+(i+1)+'</span>';
+    el.setAttribute('data-index',i);
+    el.onclick=function(){
+      let chosen=Number(this.getAttribute('data-index'));
+      let all=document.getElementsByClassName('opt');
+      for(let k=0;k<all.length;k++) all[k].style.pointerEvents='none';
+      clearInterval(timerInt);
+      if(chosen===correctIndex){ this.classList.add('ok'); score++; playCorrect(); }
+      else{ this.classList.add('no'); for(let p=0;p<all.length;p++){ if(Number(all[p].getAttribute('data-index'))===correctIndex) all[p].classList.add('ok'); } playWrong(); }
+      setTimeout(()=>{ curQ++; if(curQ<10) showQuestion(); else levelComplete(); },1000);
+    };
+    listEl.appendChild(el);
+  }
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{
+    timeLeft--;
+    document.getElementById('timer').innerText=timeLeft;
+    document.getElementById('bar').style.width=(timeLeft*10)+'%';
+    // FIX: Tick sound every second
+    if(timeLeft>3){ playTone(500,0.04,'sine',0.06); } else if(timeLeft>0){ document.getElementById('timer').classList.add('danger'); playTone(900,0.12,'square',0.4); }
+    if(timeLeft<=0){ clearInterval(timerInt); curQ++; if(curQ<10) showQuestion(); else levelComplete(); }
+  },1000);
+}
+function levelComplete(){
+  if(curLevel+1>=unlocked){ unlocked=curLevel+2; if(unlocked>100) unlocked=100; localStorage.setItem("noor_mixed_final",unlocked); }
+  // AD-PLACE 2: INTERSTITIAL AD - LEVEL COMPLETE KE BAAD - 3 mahine baad
+  // YAHAN INTERSTITIAL AD CODE LAGANA HAI - showInterstitialAd() call karein
+  // if(shouldShowInterstitial(curLevel+1)) showInterstitialAd();
+  alert("Level "+(curLevel+1)+" Complete! Score: "+score+"/10");
+  showLevels();
+}
+function resetProgress(){
+  if(confirm("Reset progress?")){ localStorage.removeItem("noor_mixed_final"); unlocked=1; showLevels(); }
+}
+
+// AD FUNCTIONS - 3 mahine baad enable karna
+function shouldShowBanner(levelNum){ if(!adsEnabled) return false; return levelNum > OFFLINE_LIMIT; }
+function shouldShowInterstitial(levelNum){ if(!adsEnabled) return false; if(levelNum <= OFFLINE_LIMIT) return false; return levelNum % 4 === 0; }
+function showInterstitialAd(){
+  // YAHAN INTERSTITIAL AD CODE - AdMob ya Facebook
+  console.log("Interstitial Ad - Level Complete");
+}
+function showRewardedAdForHint(){
+  // YAHAN REWARDED AD CODE - Hint ke liye
+  console.log("Rewarded Ad for Hint");
+}
+
+let initLang=localStorage.getItem("appLang")||"en"; applyLanguage(initLang);
+setTimeout(()=>{ showHome(); },5000);
+</script>
+
+<script>
+// Version display - Google ke liye zaruri
+window.APP_VERSION = "1.0.0";
+window.APP_BUILD = "2026-05-13";
+console.log("Click Islamic Quiz Game v" + window.APP_VERSION + " - Build: " + window.APP_BUILD);
+
+// Add version to About page automatically
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(function(){
+    var pageBox = document.getElementById('pageBox');
+    if(pageBox){
+      // When about page opens, show version
+      var observer = new MutationObserver(function(){
+        var h2 = pageBox.querySelector('h2');
+        if(h2 && h2.textContent.includes('About')){
+          if(!pageBox.querySelector('.version-badge')){
+            var badge = document.createElement('div');
+            badge.className = 'version-badge';
+            badge.style.cssText = 'background:#0f3a22;color:#FFD700;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-top:15px;display:inline-block;border:1px solid rgba(255,215,0,0.3);font-family:Poppins,sans-serif';
+            badge.innerHTML = '📱 Version: 1.0.0 | Build: 2026-05-13 | 10 Pools | 100 Levels | 100% Offline | 10 Languages';
+            pageBox.appendChild(badge);
+          }
+        }
+      });
+      observer.observe(pageBox, {childList:true, subtree:true});
+    }
+  }, 1000);
+});
+</script>
+
+<div id="answerConfetti"></div>
+<div id="levelCompleteModal">
+  <div id="levelConfetti"></div>
+  <div class="mashallah-box">
+    <span class="mashallah-cap">🏆✨</span>
+    <div class="mashallah-text" id="mashallahText">ماشاءاللہ!</div>
+    <div class="mashallah-sub" id="mashallahSub">Level Complete!</div>
+    <button class="mashallah-btn" onclick="closeLevelComplete()">Next Level →</button>
+  </div>
+</div>
+
+
+<script>
+// === FIXED - NO OVERRIDE OF CORE FUNCTIONS, ONLY ADDONS ===
+
+function showerFlowerPetals(containerId,count,duration){
+  const box=document.getElementById(containerId);
+  if(!box) return;
+  box.replaceChildren();
+  const petals=['🌸','🌺','🌼','🌷','💮'];
+  for(let i=0;i<count;i++){
+    const petal=document.createElement('span');
+    petal.className='quiz-flower-petal';
+    petal.textContent=petals[Math.floor(Math.random()*petals.length)];
+    petal.style.left=(Math.random()*100)+'%';
+    petal.style.animationDuration=(duration*(0.78+Math.random()*0.22))+'s';
+    petal.style.animationDelay=(Math.random()*0.25)+'s';
+    petal.style.fontSize=(15+Math.random()*17)+'px';
+    petal.style.setProperty('--drift',((Math.random()*140)-70)+'px');
+    box.appendChild(petal);
+  }
+  setTimeout(()=>{ if(box) box.replaceChildren(); },(duration+0.8)*1000);
+}
+
+function celebrateCorrectAnswer(){
+  const correctOption=document.querySelector('.opt.ok');
+  if(correctOption){
+    correctOption.classList.remove('correct-pulse');
+    void correctOption.offsetWidth;
+    correctOption.classList.add('correct-pulse');
+    setTimeout(()=>correctOption.classList.remove('correct-pulse'),750);
+  }
+  // A short, light shower of petals for correct answers (about 1.5–2 seconds).
+  showerFlowerPetals('answerConfetti',20,1.8);
+}
+
+function playNaturalApplause(){
+  if(!soundOn) return;
+  try{
+    if(!audioCtx) initAudio();
+    const ctx=audioCtx;
+    if(!ctx) return;
+    if(ctx.state==='suspended') ctx.resume();
+    // Short, irregular noise bursts create a more natural hand-clap texture.
+    for(let i=0;i<18;i++){
+      const when=ctx.currentTime+i*0.115+(Math.random()*0.025);
+      const duration=0.075+Math.random()*0.045;
+      const length=Math.max(1,Math.floor(ctx.sampleRate*duration));
+      const buffer=ctx.createBuffer(1,length,ctx.sampleRate);
+      const data=buffer.getChannelData(0);
+      for(let j=0;j<length;j++){
+        const fade=Math.pow(1-j/length,2.2);
+        data[j]=(Math.random()*2-1)*fade;
+      }
+      const source=ctx.createBufferSource();
+      source.buffer=buffer;
+      const filter=ctx.createBiquadFilter();
+      filter.type='bandpass';
+      filter.frequency.value=1250+Math.random()*1500;
+      filter.Q.value=0.7+Math.random()*0.8;
+      const gain=ctx.createGain();
+      gain.gain.setValueAtTime(0.0001,when);
+      gain.gain.exponentialRampToValueAtTime(0.22+Math.random()*0.12,when+0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
+      source.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(when);
+      source.stop(when+duration);
+    }
+  }catch(e){ console.log('applause error',e); }
+}
+
+function showLevelCompleteModal(levelNum){
+  try{
+    const modal=document.getElementById('levelCompleteModal');
+    const textEl=document.getElementById('mashallahText');
+    const subEl=document.getElementById('mashallahSub');
+    const confettiBox=document.getElementById('levelConfetti');
+    const langMatch=document.body.className.match(/lang-(\\w+)/);
+    const lang=langMatch?langMatch[1]:'en';
+    const texts={en:'Mashallah!',ur:'ماشاءاللہ!',ar:'ما شاء الله!',tr:'Maşallah!',fr:'Mashallah!',de:'Mashallah!',id:'Masya Allah!',bn:'মাশাআল্লাহ!',hi:'माशाअल्लाह!',es:'¡Mashallah!'};
+    const subs={en:'Level '+levelNum+' Complete!',ur:'لیول '+levelNum+' مکمل!',ar:'اكتمل المستوى '+levelNum+'!',tr:'Seviye '+levelNum+' Tamamlandı!',fr:'Niveau '+levelNum+' Terminé!',de:'Level '+levelNum+' Abgeschlossen!',id:'Level '+levelNum+' Selesai!',bn:'লেভেল '+levelNum+' সম্পূর্ণ!',hi:'लेवल '+levelNum+' पूरा!',es:'¡Nivel '+levelNum+' Completado!'};
+    if(textEl) textEl.textContent=texts[lang]||texts.en;
+    if(subEl) subEl.textContent=subs[lang]||subs.en;
+    if(confettiBox) confettiBox.replaceChildren();
+    if(modal) modal.classList.add('show');
+    // A fuller flower-petal shower and trophy for the level-complete celebration.
+    showerFlowerPetals('levelConfetti',54,3.4);
+
+    // Speak Mashallah once; start applause only after the phrase finishes.
+    if(soundOn && 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window){
+      try{
+        window.speechSynthesis.cancel();
+        const utterance=new SpeechSynthesisUtterance('ماشاءاللہ');
+        utterance.lang='ur-PK';
+        utterance.rate=0.88;
+        utterance.pitch=1;
+        utterance.volume=1;
+        let started=false;
+        const startClaps=()=>{ if(started) return; started=true; playNaturalApplause(); };
+        utterance.onend=startClaps;
+        utterance.onerror=startClaps;
+        window.speechSynthesis.speak(utterance);
+        setTimeout(startClaps,2500);
+      }catch(e){ setTimeout(playNaturalApplause,500); }
+    }else{
+      // Keep the sequence graceful when speech synthesis is unavailable or sound is off.
+      if(soundOn) setTimeout(playNaturalApplause,650);
+    }
+  }catch(e){ console.log('modal error',e); }
+}
+
+function closeLevelComplete(){
+  const modal=document.getElementById('levelCompleteModal');
+  if(modal) modal.classList.remove('show');
+  if(typeof showLevels==='function'){ showLevels(); }
+}
+
+function createSplashParticles(){
+  const splash=document.getElementById('splash');
+  if(!splash) return;
+  const icons=['✨','🌟','⭐','💫','🕌','📖','☪️','🤲','💚','🌙'];
+  for(let i=0;i<12;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      p.className='splash-particle';
+      p.textContent=icons[Math.floor(Math.random()*icons.length)];
+      p.style.left=Math.random()*100+'%';
+      p.style.animationDuration=(4+Math.random()*3)+'s';
+      p.style.fontSize=(14+Math.random()*14)+'px';
+      splash.appendChild(p);
+      setTimeout(()=>{ try{p.remove()}catch(e){} },7000);
+    }, i*150);
+  }
+  setInterval(()=>{
+    const p=document.createElement('div');
+    p.className='splash-particle';
+    p.textContent=icons[Math.floor(Math.random()*icons.length)];
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDuration=(4+Math.random()*3)+'s';
+    p.style.fontSize=(14+Math.random()*14)+'px';
+    splash.appendChild(p);
+    setTimeout(()=>{ try{p.remove()}catch(e){} },7000);
+  },400);
+}
+
+// Hook after DOM load - wrap original functions without replacing their logic
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(()=>{ try{ createSplashParticles(); }catch(e){} }, 300);
+  
+  // Patch playCorrect to also celebrate
+  const origPlayCorrect = window.playCorrect;
+  window.playCorrect = function(){
+    if(origPlayCorrect) origPlayCorrect();
+    try{ celebrateCorrectAnswer(); }catch(e){}
+  };
+  
+  // Level completion: update the existing progress value and show the custom completion screen.
+  window.levelComplete = function(){
+    try{
+      clearInterval(timerInt);
+      if(curLevel+1>=unlocked){
+        unlocked=Math.min(curLevel+2,100);
+        localStorage.setItem('noor_mixed_final',String(unlocked));
+      }
+      if(soundOn){
+        initAudio();
+        if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();
+      }
+      showLevelCompleteModal(curLevel+1);
+    }catch(e){ console.log('levelComplete error',e); }
+  };
+  
+  // Splash hide - 5 SECONDS PROFESSIONAL
+  setTimeout(()=>{
+    const splash=document.getElementById('splash');
+    if(splash){
+      splash.style.transition='opacity .4s ease, transform .4s ease';
+      splash.style.opacity='0';
+      splash.style.transform='scale(1.05)';
+      setTimeout(()=>{ splash.style.display='none'; },400);
+    }
+  },5000);
+});
+</script>
+
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+
+</html>
